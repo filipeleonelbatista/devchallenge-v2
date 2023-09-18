@@ -12,19 +12,9 @@ export default function Header() {
           <Logo />
           <nav className="ml-auto flex items-center space-x-4 mx-6 flex items-center space-x-4 lg:space-x-6">
             <Link
-              to="/admin/dashboard"
+              to="/admin/inicio"
               className={`text-sm font-medium ${
-                location.pathname === "/"
-                  ? "text-yellow-400"
-                  : "text-muted-foreground"
-              } transition-colors hover:text-yellow-600`}
-            >
-              Inicio
-            </Link>
-            <Link
-              to="/admin/challenges"
-              className={`text-sm font-medium ${
-                location.pathname === "/challenges"
+                location.pathname === "/admin/inicio"
                   ? "text-yellow-400"
                   : "text-muted-foreground"
               } transition-colors hover:text-yellow-600`}

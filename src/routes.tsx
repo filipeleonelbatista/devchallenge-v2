@@ -16,7 +16,7 @@ import { Home } from "./pages/Home";
 const ProtectedRoute = ({ element }) => {
   const { isLogged } = useAuth();
 
-  return isLogged ? element : <Navigate to="/login" replace />;
+  return isLogged ? element : <Navigate to="/admin" replace />;
 };
 
 export function Routes() {

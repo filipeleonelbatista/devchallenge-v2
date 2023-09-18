@@ -1,134 +1,181 @@
 /* eslint-disable no-restricted-globals */
 import {
-    addDoc,
-    collection,
-    deleteDoc,
-    doc,
-    getDoc,
-    getDocs,
-    orderBy,
-    query,
-    setDoc,
-} from 'firebase/firestore';
+  addDoc,
+  collection,
+  deleteDoc,
+  doc,
+  getDoc,
+  getDocs,
+  orderBy,
+  query,
+  setDoc,
+} from "firebase/firestore";
 import {
-    deleteObject,
-    getDownloadURL,
-    ref,
-    uploadBytesResumable,
-} from 'firebase/storage';
-import React, { createContext, useCallback, useEffect, useState } from 'react';
-import { db, storage } from '../services/firebase-config';
+  deleteObject,
+  getDownloadURL,
+  ref,
+  uploadBytesResumable,
+} from "firebase/storage";
+import {
+  createContext,
+  ReactNode,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
+import { db, storage } from "../services/firebase-config";
 
-export function deleteImageFromStorage(imagePath) {
-    if (!imagePath) return;
+export function deleteImageFromStorage(imagePath: string) {
+  if (!imagePath) return;
 
-    const imageRef = ref(storage, imagePath);
+  const imageRef = ref(storage, imagePath);
 
-    return deleteObject(imageRef)
-        .then(() => {
-            return true;
-        })
-        .catch((error) => {
-            console.log('deleteImageFromStorage error', error);
-            return false;
+  return deleteObject(imageRef)
+    .then(() => {
+      return true;
+    })
+    .catch((error) => {
+      console.log("deleteImageFromStorage error", error);
+      return false;
+    });
+}
+
+export async function uploadImageAsync(file: File, path: string) {
+  if (!file) return;
+
+  const storageRef = ref(
+    storage,
+    `/${path}/${Date.now()}-${encodeURI(file.name)}`
+  );
+  await uploadBytesResumable(storageRef, file);
+
+  return getDownloadURL(storageRef);
+}
+
+interface ChallengesContextProviderProps {
+  children: ReactNode;
+}
+
+export interface Challenge {
+  id: string;
+  type: string;
+  level: string;
+  techs: string[];
+  githubRepository: string;
+  username: string;
+  background: string;
+  name: string;
+  description: string;
+  createdAt: number;
+  active: boolean;
+}
+
+interface ChallengesContextType {
+  challengesList: Challenge[];
+  selectedChallenge: Challenge | null;
+  setSelectedChallenge: (challenge: Challenge | null) => void;
+  updateChallengesList: () => Promise<void>;
+  handleDeleteChallenge: (id: string) => Promise<void>;
+  addChallenge: (data: Challenge) => Promise<void>;
+  updateChallenge: (data: Challenge) => Promise<void>;
+  getChallengeByID: (id: string) => Promise<Challenge | undefined>;
+}
+
+export const ChallengesContext = createContext<ChallengesContextType>({
+  challengesList: [],
+  selectedChallenge: null,
+  setSelectedChallenge: () => {},
+  updateChallengesList: () => Promise.resolve(),
+  handleDeleteChallenge: () => Promise.resolve(),
+  addChallenge: () => Promise.resolve(),
+  updateChallenge: () => Promise.resolve(),
+  getChallengeByID: () => Promise.resolve(undefined),
+});
+
+export function ChallengesContextProvider(
+  props: ChallengesContextProviderProps
+) {
+  const [challengesList, setChallengesList] = useState<Challenge[]>([]);
+  const [selectedChallenge, setSelectedChallenge] = useState<Challenge | null>(
+    null
+  );
+
+  async function getAllChallenges() {
+    const contactsRef = collection(db, "challenges");
+    const result = getDocs(query(contactsRef, orderBy("createdAt", "desc")))
+      .then((snap) => {
+        let challengeList = [] as Challenge[];
+        snap.docs.forEach((doc) => {
+          challengeList.push({ ...doc.data(), id: doc.id });
         });
-}
+        return challengeList;
+      })
+      .catch((error) => {
+        console.log("getAllChallenges error", error);
+        return [];
+      });
 
-export async function uploadImageAsync(file, path) {
-    if (!file) return;
+    return result;
+  }
 
-    const storageRef = ref(
-        storage,
-        `/${path}/${Date.now()}-${encodeURI(file.name)}`
+  async function getChallengeByID(id: string) {
+    const challengeRef = doc(db, "challenges", id);
+    const challengeSnap = await getDoc(challengeRef);
+    const challenge = challengeSnap.data();
+    return challenge;
+  }
+
+  async function updateChallenge(data: Challenge) {
+    await setDoc(doc(db, "challenges", data.id), data);
+
+    await updateChallengesList();
+  }
+
+  async function addChallenge(data: Challenge) {
+    const challengeRef = collection(db, "challenges");
+    await addDoc(challengeRef, data);
+
+    await updateChallengesList();
+  }
+
+  async function handleDeleteChallenge(id: string) {
+    const response = confirm(
+      "Deseja realmente deletar esse registro? Esta ação é irreverssível"
     );
-    await uploadBytesResumable(storageRef, file);
-
-    return getDownloadURL(storageRef);
-}
-
-export const ChallengesContext = createContext({});
-
-export function ChallengesContextProvider(props) {
-    const [challengesList, setChallengesList] = useState([]);
-
-    const [selectedChallenge, setSelectedChallenge] = useState(false);
-
-    async function getAllChallenges() {
-        const contactsRef = collection(db, 'challenges');
-        const result = getDocs(query(contactsRef, orderBy('createdAt', 'desc')))
-            .then((snap) => {
-                let challengeList = [];
-                snap.docs.forEach((doc) => {
-                    challengeList.push({ ...doc.data(), id: doc.id });
-                });
-                return challengeList;
-            })
-            .catch((error) => {
-                console.log('getAllChallenges error', error);
-                return [];
-            });
-
-        return result;
+    if (response) {
+      const challenge = await getChallengeByID(id);
+      deleteImageFromStorage(challenge.avatar);
+      await deleteDoc(doc(db, "challenges", id));
     }
+    await updateChallengesList();
+  }
 
-    async function getChallengeByID(id) {
-        const challengeRef = doc(db, 'challenges', id);
-        const challengeSnap = await getDoc(challengeRef);
-        const challenge = challengeSnap.data();
-        return challenge;
-    }
+  const updateChallengesList = useCallback(async () => {
+    const response = await getAllChallenges();
+    setChallengesList(response);
+  }, []);
 
-    async function updateChallenge(data) {
-        await setDoc(doc(db, 'challenges', data.id), data);
+  useEffect(() => {
+    const executeAsync = async () => {
+      await updateChallengesList();
+    };
+    executeAsync();
+  }, [updateChallengesList]);
 
-        await updateChallengesList();
-    }
-
-    async function addChallenge(data) {
-        const challengeRef = collection(db, 'challenges');
-        await addDoc(challengeRef, data);
-
-        await updateChallengesList();
-    }
-
-    async function handleDeleteChallenge(id) {
-        const response = confirm(
-            'Deseja realmente deletar esse registro? Esta ação é irreverssível'
-        );
-        if (response) {
-            const challenge = await getChallengeByID(id);
-            deleteImageFromStorage(challenge.avatar);
-            await deleteDoc(doc(db, 'challenges', id));
-        }
-        await updateChallengesList();
-    }
-
-    const updateChallengesList = useCallback(async () => {
-        const response = await getAllChallenges();
-        setChallengesList(response);
-    }, []);
-
-    useEffect(() => {
-        const executeAsync = async () => {
-            await updateChallengesList();
-        };
-        executeAsync();
-    }, [updateChallengesList]);
-
-    return (
-        <ChallengesContext.Provider
-            value={{
-                challengesList,
-                selectedChallenge,
-                setSelectedChallenge,
-                updateChallengesList,
-                handleDeleteChallenge,
-                addChallenge,
-                updateChallenge,
-                getChallengeByID,
-            }}
-        >
-            {props.children}
-        </ChallengesContext.Provider>
-    );
+  return (
+    <ChallengesContext.Provider
+      value={{
+        challengesList,
+        selectedChallenge,
+        setSelectedChallenge,
+        updateChallengesList,
+        handleDeleteChallenge,
+        addChallenge,
+        updateChallenge,
+        getChallengeByID,
+      }}
+    >
+      {props.children}
+    </ChallengesContext.Provider>
+  );
 }

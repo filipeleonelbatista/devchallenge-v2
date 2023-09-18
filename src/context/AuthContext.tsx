@@ -1,3 +1,4 @@
+import { authentication, db } from "@/services/firebase-config";
 import { AuthErrorHandler } from "@/utils/handleFirebaseError";
 import { isStringEmpty } from "@/utils/string";
 import {
@@ -9,10 +10,45 @@ import {
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { createContext, useEffect, useState } from "react";
 
-export const AuthContext = createContext({});
+type UserType = {
+  // Defina os campos do objeto de usuário aqui
+  uid: string;
+  // Outros campos do usuário
+};
 
-export function AuthContextProvider(props) {
-  const [user, setUser] = useState();
+type SignInResult = {
+  user: UserType | null;
+  status: boolean;
+  message?: string;
+  err?: any;
+};
+
+type AuthContextProviderProps = {
+  children: React.ReactNode;
+};
+
+type AuthContextType = {
+  user: UserType | null;
+  RegisterUser: (userData: {
+    email: string;
+    password: string;
+    user: UserType;
+  }) => Promise<boolean>;
+  signInUser: (email: string, password: string) => Promise<SignInResult>;
+  logout: () => void;
+  handleForgotUser: (email: string) => void;
+  isLogged: boolean;
+  getUserByID: (id: string) => Promise<UserType | null>;
+  isMenuHide: boolean;
+  setIsMenuHide: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+export const AuthContext = createContext<AuthContextType | undefined>(
+  undefined
+);
+
+export function AuthContextProvider(props: AuthContextProviderProps) {
+  const [user, setUser] = useState<UserType | null>(null);
 
   const [isLogged, setIsLogged] = useState(false);
   const [isMenuHide, setIsMenuHide] = useState(false);
@@ -33,7 +69,7 @@ export function AuthContextProvider(props) {
     }
   }
 
-  async function updateUserByID(id, data) {
+  async function updateUserByID(id: string, data: UserType) {
     const userData = await getUserByID(id);
 
     const userUpdated = {
@@ -69,7 +105,7 @@ export function AuthContextProvider(props) {
       });
   }
 
-  function handleForgotUser(email) {
+  function handleForgotUser(email: string) {
     if (isStringEmpty(email)) {
       alert("O campo email não foi preenchido");
       return true;
@@ -85,7 +121,7 @@ export function AuthContextProvider(props) {
       });
   }
 
-  async function getUserByID(id) {
+  async function getUserByID(id: string) {
     const usersRef = doc(db, "users", id);
     const userSnap = await getDoc(usersRef);
     const user = userSnap.data();
@@ -93,7 +129,7 @@ export function AuthContextProvider(props) {
     return user;
   }
 
-  function signInUser(email, password) {
+  function signInUser(email: string, password: string) {
     if (isStringEmpty(email)) {
       const status = {
         status: false,
@@ -133,7 +169,7 @@ export function AuthContextProvider(props) {
       });
   }
 
-  async function RegisterUser({ email, password, user }) {
+  async function RegisterUser({ email, password, user }: any) {
     return createUserWithEmailAndPassword(authentication, email, password)
       .then(async (re) => {
         const newUser = {
