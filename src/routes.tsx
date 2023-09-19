@@ -12,6 +12,7 @@ import { Registration } from "./pages/admin/Registration";
 import { Challenges } from "./pages/Challenges";
 import { Community } from "./pages/Community";
 import { Detail } from "./pages/Detail";
+import { Hacktoberfest } from "./pages/Hacktoberfest";
 import { Home } from "./pages/Home";
 
 const ProtectedRoute = ({ element }: { element: ReactNode }) => {
@@ -27,6 +28,7 @@ export function Routes() {
     <BrowserRouter>
       <Switch>
         <Route path="/" element={<Home />} />
+        <Route path="/hacktoberfest" element={<Hacktoberfest />} />
         <Route path="/challenges" element={<Challenges />} />
         <Route path="/details/:id" element={<Detail />} />
         <Route path="/devs" element={<Community />} />

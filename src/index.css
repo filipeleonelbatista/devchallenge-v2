@@ -66,3 +66,18 @@
   letter-spacing: 0.02em;
   animation: typing 2s steps(25, end), blink-caret 0.5s step-end infinite;
 }
+
+/* Pulsando hacktoberfest */
+
+@keyframes pulse {
+  0%, 100% {
+      transform: scale(1);
+  }
+  50% {
+      transform: scale(1.05);
+  }
+}
+
+.animate-pulse {
+  animation: pulse 0.8s infinite;
+}

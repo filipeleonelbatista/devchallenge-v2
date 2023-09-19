@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Logo } from "./Logo";
 import { useLocation } from "react-router-dom";
+import dayjs from "dayjs";
 
 export default function HeaderSite() {
   const location = useLocation();
@@ -41,6 +42,19 @@ export default function HeaderSite() {
             >
               Comunidade
             </Link>
+            {dayjs().isAfter(dayjs(`${new Date().getFullYear()}-09-15`)) &&
+              dayjs().isBefore(dayjs(`${new Date().getFullYear()}-11-05`)) && (
+                <Link
+                  to="/hacktoberfest"
+                  className={`text-sm font-medium ${
+                    location.pathname === "/hacktoberfest"
+                      ? "bg-yellow-600"
+                      : "bg-yellow-400"
+                  } transition-colors hover:bg-yellow-600 animate-pulse text-black px-6 py-2 rounded-full`}
+                >
+                  Hacktoberfest {new Date().getFullYear()}
+                </Link>
+              )}
           </nav>
           {/* <div className="ml-auto flex items-center space-x-4">
             <Search />

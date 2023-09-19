@@ -67,6 +67,7 @@ export interface Challenge {
   description: string;
   createdAt: number;
   active: boolean;
+  isHacktoberfest?: boolean;
 }
 
 interface ChallengesContextType {
