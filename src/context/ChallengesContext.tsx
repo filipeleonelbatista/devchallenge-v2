@@ -57,7 +57,7 @@ interface ChallengesContextProviderProps {
 }
 
 export interface Challenge {
-  id: string;
+  id?: string;
   type: string;
   level: string;
   techs: string[];
@@ -144,8 +144,10 @@ export function ChallengesContextProvider(
     );
     if (response) {
       const challenge = await getChallengeByID(id);
-      deleteImageFromStorage(challenge.avatar);
-      await deleteDoc(doc(db, "challenges", id));
+      if (challenge) {
+        deleteImageFromStorage(challenge.avatar);
+        await deleteDoc(doc(db, "challenges", id));
+      }
     }
     await updateChallengesList();
   }

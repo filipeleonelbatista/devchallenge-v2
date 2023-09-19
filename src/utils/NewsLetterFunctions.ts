@@ -1,7 +1,7 @@
 import { addDoc, collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "@/services/firebase-config";
 
-async function addEmailIntoNewsletter(email) {
+async function addEmailIntoNewsletter(email: string) {
   try {
     // Verificando se o email ja está cadastrado
     const newsletterRef = collection(db, "newsletter");

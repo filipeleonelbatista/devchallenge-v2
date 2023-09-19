@@ -1,6 +1,5 @@
-import { Link } from "react-router-dom";
+import { FaDiscord, FaGithub } from "react-icons/fa";
 import { Logo } from "./Logo";
-import { FaGithub, FaDiscord } from "react-icons/fa";
 
 export default function FooterSite() {
   return (

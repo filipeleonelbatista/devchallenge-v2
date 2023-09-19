@@ -2,7 +2,6 @@ import FooterSite from "@/components/FooterSite";
 import HeaderSite from "@/components/HeaderSite";
 import { Button } from "@/components/ui/button";
 import { FaCheck, FaGithub, FaLinkedin } from "react-icons/fa";
-import { Link } from "react-router-dom";
 
 export function Detail() {
   const includes = [
@@ -151,13 +150,13 @@ export function Detail() {
               </div>
             </div>
             <div className="flex flex-col items-center gap-2">
-              <Link>
+              <a>
                 <FaGithub className="w-7 h-7 mr-2 text-white hover:text-yellow-400" />
-              </Link>
+              </a>
 
-              <Link>
+              <a>
                 <FaLinkedin className="w-7 h-7 mr-2 text-white hover:text-yellow-400" />
-              </Link>
+              </a>
             </div>
           </div>
         </div>

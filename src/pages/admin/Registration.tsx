@@ -2,17 +2,21 @@ import { Link } from "react-router-dom";
 
 import { Logo } from "@/components/Logo";
 import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useEffect, useState } from "react";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useAuth } from "@/hooks/useAuth";
 import { useFormik } from "formik";
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import secureLocalStorage from "react-secure-storage";
 import * as Yup from "yup";
+
+interface LoginForm {
+  email: string;
+  password: string;
+  remember: boolean;
+}
 
 export function Registration() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -41,12 +45,12 @@ export function Registration() {
       remember: false,
     },
     validationSchema: formSchema,
-    onSubmit: (values) => {
+    onSubmit: (values: LoginForm) => {
       handleSubmitForm(values);
     },
   });
 
-  const handleSubmitForm = async (formValues) => {
+  const handleSubmitForm = async (formValues: LoginForm) => {
     try {
       setIsLoading(true);
       if (formValues.remember) {
@@ -89,10 +93,7 @@ export function Registration() {
 
   return (
     <div className="container relative hidden h-[800px] flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
-      <Link
-        to="/admin"
-        className="absolute right-4 top-4 md:right-8 md:top-8"
-      >
+      <Link to="/admin" className="absolute right-4 top-4 md:right-8 md:top-8">
         Entrar
       </Link>
       <div
@@ -118,7 +119,9 @@ export function Registration() {
       <div className="lg:p-8">
         <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
           <div className="flex flex-col space-y-2 text-center">
-            <h1 className="text-2xl font-semibold tracking-tight">Cadastre-se</h1>
+            <h1 className="text-2xl font-semibold tracking-tight">
+              Cadastre-se
+            </h1>
             <p className="text-sm text-muted-foreground">
               Digite seu email e senha para continuar
             </p>
@@ -208,14 +211,14 @@ export function Registration() {
           <p className="px-8 text-center text-sm text-muted-foreground">
             Clicando em continuar você aceita nossos{" "}
             <Link
-              href="/terms"
+              to="/terms"
               className="underline underline-offset-4 hover:text-primary"
             >
               Termos de serviço
             </Link>{" "}
             e{" "}
             <Link
-              href="/privacy"
+              to="/privacy"
               className="underline underline-offset-4 hover:text-primary"
             >
               Politicas de privacidade

@@ -11,9 +11,9 @@ import { doc, getDoc, setDoc } from "firebase/firestore";
 import { createContext, useEffect, useState } from "react";
 
 type UserType = {
-  // Defina os campos do objeto de usuário aqui
   uid: string;
-  // Outros campos do usuário
+  email: string;
+  password: string;
 };
 
 type SignInResult = {
@@ -39,6 +39,7 @@ type AuthContextType = {
   handleForgotUser: (email: string) => void;
   isLogged: boolean;
   getUserByID: (id: string) => Promise<UserType | null>;
+  updateUserByID: (id: string) => Promise<UserType | null>;
   isMenuHide: boolean;
   setIsMenuHide: React.Dispatch<React.SetStateAction<boolean>>;
 };
@@ -53,15 +54,16 @@ export function AuthContextProvider(props: AuthContextProviderProps) {
   const [isLogged, setIsLogged] = useState(false);
   const [isMenuHide, setIsMenuHide] = useState(false);
 
-  function getKeyLocalStorage(key) {
-    return localStorage.getItem(key) === null
-      ? false
-      : localStorage.getItem(key);
-  }
-  function setKeyLocalStorage(key, value) {
+  // function getKeyLocalStorage(key) {
+  //   return localStorage.getItem(key) === null
+  //     ? false
+  //     : localStorage.getItem(key);
+  // }
+
+  function setKeyLocalStorage(key: string, value: string) {
     return localStorage.setItem(key, value);
   }
-  function removeKeyLocalStorage(key) {
+  function removeKeyLocalStorage(key: string) {
     const hasLocalStorageData = !(localStorage.getItem(key) === null);
 
     if (hasLocalStorageData) {
@@ -117,7 +119,7 @@ export function AuthContextProvider(props: AuthContextProviderProps) {
       })
       .catch((err) => {
         console.log("handleForgotUser error", err);
-        alert(AuthErrorHandler[err.code]);
+        alert(AuthErrorHandler(err.code));
       });
   }
 
@@ -160,7 +162,7 @@ export function AuthContextProvider(props: AuthContextProviderProps) {
       .catch((err) => {
         const status = {
           status: false,
-          message: AuthErrorHandler[err.code],
+          message: AuthErrorHandler(err.code),
           err,
         };
 
@@ -193,7 +195,7 @@ export function AuthContextProvider(props: AuthContextProviderProps) {
       .catch((err) => {
         alert({
           severity: "error",
-          message: AuthErrorHandler[err.code],
+          message: AuthErrorHandler(err.code),
         });
         return false;
       });
@@ -237,6 +239,7 @@ export function AuthContextProvider(props: AuthContextProviderProps) {
         getUserByID,
         isMenuHide,
         setIsMenuHide,
+        updateUserByID,
       }}
     >
       {props.children}

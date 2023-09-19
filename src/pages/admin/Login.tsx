@@ -5,14 +5,19 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useEffect, useState } from "react";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useAuth } from "@/hooks/useAuth";
 import { useFormik } from "formik";
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import secureLocalStorage from "react-secure-storage";
 import * as Yup from "yup";
+
+interface LoginForm {
+  email: string;
+  password: string;
+  remember: boolean;
+}
 
 export function Login() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -41,12 +46,12 @@ export function Login() {
       remember: false,
     },
     validationSchema: formSchema,
-    onSubmit: (values) => {
+    onSubmit: (values: LoginForm) => {
       handleSubmitForm(values);
     },
   });
 
-  const handleSubmitForm = async (formValues) => {
+  const handleSubmitForm = async (formValues: LoginForm) => {
     try {
       setIsLoading(true);
       if (formValues.remember) {
@@ -223,14 +228,14 @@ export function Login() {
           <p className="px-8 text-center text-sm text-muted-foreground">
             Clicando em continuar você aceita nossos{" "}
             <Link
-              href="/terms"
+              to="/terms"
               className="underline underline-offset-4 hover:text-primary"
             >
               Termos de serviço
             </Link>{" "}
             e{" "}
             <Link
-              href="/privacy"
+              to="/privacy"
               className="underline underline-offset-4 hover:text-primary"
             >
               Politicas de privacidade

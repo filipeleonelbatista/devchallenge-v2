@@ -29,10 +29,21 @@ import * as Yup from "yup";
 
 import { GoVideo } from "react-icons/go";
 
+interface FormType {
+  name: string;
+  description: string;
+  type: string;
+  level: string;
+  username: string;
+  githubRepository: string;
+  techs: string[];
+  background: File | null;
+}
+
 export function Community() {
   const { addChallenge } = useChallenges();
 
-  const [imagePreview, setImagePreview] = useState(null);
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
 
   const formSchema = useMemo(() => {
     return Yup.object().shape({
@@ -45,7 +56,7 @@ export function Community() {
         .min(1, "Selecione pelo menos uma linguagem")
         .required("O campo Linguagens é obrigatório"),
       background: Yup.mixed()
-        .test("fileFormat", "A imagem deve ser PNG ou JPG", (value) => {
+        .test("fileFormat", "A imagem deve ser PNG ou JPG", (value: any) => {
           if (!value) {
             return true;
           }
@@ -72,16 +83,15 @@ export function Community() {
       background: null,
     },
     validationSchema: formSchema,
-    onSubmit: (values) => {
+    onSubmit: (values: FormType) => {
       handleSubmitForm(values);
     },
   });
 
-  const handleSubmitForm = async (formValues) => {
-    let uploadURLImage = await uploadImageAsync(
-      formValues.background,
-      "challenges"
-    );
+  const handleSubmitForm = async (formValues: FormType) => {
+    let uploadURLImage = formValues.background
+      ? await uploadImageAsync(formValues.background, "challenges")
+      : "";
 
     const data = {
       type: formValues.type,
@@ -89,7 +99,7 @@ export function Community() {
       techs: formValues.techs,
       githubRepository: formValues.githubRepository,
       username: formValues.username,
-      background: uploadURLImage,
+      background: uploadURLImage ?? "",
       name: formValues.name,
       description: formValues.description,
       createdAt: Date.now(),
@@ -99,6 +109,13 @@ export function Community() {
     await addChallenge(data);
 
     document.getElementById("dialog-close")?.click();
+  };
+
+  const handleRemoveTech = (index: number) => {
+    const result = formik.values.techs.filter(
+      (_, currentIndex) => !(currentIndex === index)
+    );
+    formik.setFieldValue("techs", result);
   };
 
   return (
@@ -144,9 +161,11 @@ export function Community() {
                 accept="image/*"
                 className="sr-only"
                 onChange={(event) => {
-                  formik.setFieldValue("background", event.target.files[0]);
+                  if (event.target.files) {
+                    formik.setFieldValue("background", event.target.files[0]);
 
-                  setImagePreview(URL.createObjectURL(event.target.files[0]));
+                    setImagePreview(URL.createObjectURL(event.target.files[0]));
+                  }
                 }}
               />
             </div>
@@ -211,7 +230,6 @@ export function Community() {
               <Label htmlFor="type">Tipo</Label>
 
               <Select
-                id="type"
                 onValueChange={(event) => formik.setFieldValue("type", event)}
               >
                 <SelectTrigger>
@@ -232,7 +250,6 @@ export function Community() {
               <Label htmlFor="level">Dificuldade</Label>
 
               <Select
-                id="level"
                 onValueChange={(event) => formik.setFieldValue("level", event)}
               >
                 <SelectTrigger>
@@ -255,7 +272,6 @@ export function Community() {
               <Label htmlFor="techs">Linguagens</Label>
 
               <Select
-                id="techs"
                 onValueChange={(event) =>
                   formik.setFieldValue("techs", [...formik.values.techs, event])
                 }

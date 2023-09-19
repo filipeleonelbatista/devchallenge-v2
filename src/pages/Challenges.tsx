@@ -14,7 +14,7 @@ import { useChallenges } from "@/hooks/useChallenges";
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const colorMatch = (option) => {
+const colorMatch = (option: string) => {
   switch (option) {
     case "Iniciante":
       return "nephritis";
@@ -73,7 +73,6 @@ export function Challenges() {
             <div className="space-y-2 w-32">
               <Label htmlFor="category">Categorias</Label>
               <Select
-                id="category"
                 value={typeFilter}
                 onValueChange={(value) => setTypeFilter(value)}
               >
@@ -91,7 +90,6 @@ export function Challenges() {
             <div className="space-y-2 w-32">
               <Label htmlFor="languages">Linguagens</Label>
               <Select
-                id="languages"
                 value={languageFilter}
                 onValueChange={(value) => setLanguageFilter(value)}
               >

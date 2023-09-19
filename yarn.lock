@@ -1271,6 +1271,13 @@
   resolved "https://registry.yarnpkg.com/@remix-run/router/-/router-1.9.0.tgz#9033238b41c4cbe1e961eccb3f79e2c588328cf6"
   integrity sha512-bV63itrKBC0zdT27qYm6SDZHlkXwFL1xMBuhkn+X7l0+IIhNaH5wuuvZKp6eKhCD4KFhujhfhCT1YxXW6esUIA==
 
+"@types/firebase@^3.2.1":
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/@types/firebase/-/firebase-3.2.1.tgz#17c1c8fee7485ab09668d2461e34540bdf44b3b1"
+  integrity sha512-G8XgHMu2jHlElfc2xVNaYP50F0qrqeTCjgeG1v5b4SRwWG4XKC4fCuEdVZuZaMRmVygcnbRZBAo9O7RsDvmkGQ==
+  dependencies:
+    firebase "*"
+
 "@types/hoist-non-react-statics@^3.3.1":
   version "3.3.2"
   resolved "https://registry.yarnpkg.com/@types/hoist-non-react-statics/-/hoist-non-react-statics-3.3.2.tgz#dc1e9ded53375d37603c479cc12c693b0878aa2a"
@@ -2037,7 +2044,7 @@ find-up@^5.0.0:
     locate-path "^6.0.0"
     path-exists "^4.0.0"
 
-firebase@^10.4.0:
+firebase@*, firebase@^10.4.0:
   version "10.4.0"
   resolved "https://registry.yarnpkg.com/firebase/-/firebase-10.4.0.tgz#8b3c94765d69ebe706ff02e6bb0ed48092900fa6"
   integrity sha512-3Z8WsNwA7kbcKGZ+nrTZ/ES518pk0K440ZJYD8nUNKN5hV6ll+unhUw30t1msedN6yIFjhsC/9OwT4Z0ohwO2w==

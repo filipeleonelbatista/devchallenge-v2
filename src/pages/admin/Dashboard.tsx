@@ -3,7 +3,6 @@ import Header from "@/components/Header";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { FaCheck, FaTimes, FaTrash } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 
 import {
@@ -41,12 +40,23 @@ import { useMemo, useState } from "react";
 
 import { GoVideo } from "react-icons/go";
 
+interface FormType {
+  name: string;
+  description: string;
+  type: string;
+  level: string;
+  username: string;
+  githubRepository: string;
+  techs: string[];
+  background: File | null;
+  active: boolean;
+}
+
 export function Dashboard() {
-  const navigate = useNavigate();
   const { challengesList, handleDeleteChallenge, addChallenge } =
     useChallenges();
 
-  const [imagePreview, setImagePreview] = useState(null);
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
 
   const formSchema = useMemo(() => {
     return Yup.object().shape({
@@ -59,7 +69,7 @@ export function Dashboard() {
         .min(1, "Selecione pelo menos uma linguagem")
         .required("O campo Linguagens é obrigatório"),
       background: Yup.mixed()
-        .test("fileFormat", "A imagem deve ser PNG ou JPG", (value) => {
+        .test("fileFormat", "A imagem deve ser PNG ou JPG", (value: any) => {
           if (!value) {
             return true;
           }
@@ -88,23 +98,22 @@ export function Dashboard() {
       active: true,
     },
     validationSchema: formSchema,
-    onSubmit: (values) => {
+    onSubmit: (values: FormType) => {
       handleSubmitForm(values);
     },
   });
 
-  const handleRemoveTech = (index) => {
+  const handleRemoveTech = (index: number) => {
     const result = formik.values.techs.filter(
       (_, currentIndex) => !(currentIndex === index)
     );
     formik.setFieldValue("techs", result);
   };
 
-  const handleSubmitForm = async (formValues) => {
-    let uploadURLImage = await uploadImageAsync(
-      formValues.background,
-      "challenges"
-    );
+  const handleSubmitForm = async (formValues: FormType) => {
+    let uploadURLImage = formValues.background
+      ? await uploadImageAsync(formValues.background, "challenges")
+      : "";
 
     const data = {
       type: formValues.type,
@@ -112,7 +121,7 @@ export function Dashboard() {
       techs: formValues.techs,
       githubRepository: formValues.githubRepository,
       username: formValues.username,
-      background: uploadURLImage,
+      background: uploadURLImage ?? "",
       name: formValues.name,
       description: formValues.description,
       createdAt: Date.now(),
@@ -167,9 +176,11 @@ export function Dashboard() {
                 accept="image/*"
                 className="sr-only"
                 onChange={(event) => {
-                  formik.setFieldValue("background", event.target.files[0]);
+                  if (event.target.files) {
+                    formik.setFieldValue("background", event.target.files[0]);
 
-                  setImagePreview(URL.createObjectURL(event.target.files[0]));
+                    setImagePreview(URL.createObjectURL(event.target.files[0]));
+                  }
                 }}
               />
             </div>
@@ -234,7 +245,6 @@ export function Dashboard() {
               <Label htmlFor="type">Tipo</Label>
 
               <Select
-                id="type"
                 onValueChange={(event) => formik.setFieldValue("type", event)}
               >
                 <SelectTrigger>
@@ -255,7 +265,6 @@ export function Dashboard() {
               <Label htmlFor="level">Dificuldade</Label>
 
               <Select
-                id="level"
                 onValueChange={(event) => formik.setFieldValue("level", event)}
               >
                 <SelectTrigger>
@@ -278,7 +287,6 @@ export function Dashboard() {
               <Label htmlFor="techs">Linguagens</Label>
 
               <Select
-                id="techs"
                 onValueChange={(event) =>
                   formik.setFieldValue("techs", [...formik.values.techs, event])
                 }
@@ -400,7 +408,9 @@ export function Dashboard() {
                   </TableCell>
                   <TableCell className="text-right">
                     <Button
-                      onClick={() => handleDeleteChallenge(item.id)}
+                      onClick={() =>
+                        item?.id && handleDeleteChallenge(item?.id)
+                      }
                       className=" w-10 h-10 p-3 bg-red-600 rounded-full hover:bg-red-800"
                     >
                       <FaTrash className="w-6 h-6 text-white" />

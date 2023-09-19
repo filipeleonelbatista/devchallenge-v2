@@ -1,20 +1,19 @@
 import FooterSite from "@/components/FooterSite";
 import HeaderSite from "@/components/HeaderSite";
 import { Button } from "@/components/ui/button";
-import { Player } from "@lottiefiles/react-lottie-player";
-import { Link } from "react-router-dom";
-import { SlScreenDesktop, SlScreenSmartphone } from "react-icons/sl";
-import { IoCodeSlash, IoSearch, IoShareSocialOutline } from "react-icons/io5";
 import { Input } from "@/components/ui/input";
-import { useState } from "react";
 import { addEmailIntoNewsletter } from "@/utils/NewsLetterFunctions";
-import { useNavigate } from "react-router-dom";
+import { Player } from "@lottiefiles/react-lottie-player";
+import { useState } from "react";
+import { IoCodeSlash, IoSearch, IoShareSocialOutline } from "react-icons/io5";
+import { SlScreenDesktop, SlScreenSmartphone } from "react-icons/sl";
+import { Link, useNavigate } from "react-router-dom";
 
 export function Home() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
 
-  async function handleSubscribe(e) {
+  async function handleSubscribe(e: any) {
     e.preventDefault();
 
     try {
