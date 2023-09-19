@@ -9,18 +9,18 @@ import {
 } from "firebase/auth";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { createContext, useEffect, useState } from "react";
+import { DocumentData } from "firebase/firestore";
 
 type UserType = {
-  uid: string;
   email: string;
   password: string;
 };
 
 type SignInResult = {
-  user: UserType | null;
+  user: UserType | undefined;
   status: boolean;
-  message?: string;
-  err?: any;
+  message: string | undefined;
+  error: boolean;
 };
 
 type AuthContextProviderProps = {
@@ -39,7 +39,7 @@ type AuthContextType = {
   handleForgotUser: (email: string) => void;
   isLogged: boolean;
   getUserByID: (id: string) => Promise<UserType | null>;
-  updateUserByID: (id: string) => Promise<UserType | null>;
+  updateUserByID: (id: string, data: UserType) => Promise<UserType | null>;
   isMenuHide: boolean;
   setIsMenuHide: React.Dispatch<React.SetStateAction<boolean>>;
 };
@@ -71,25 +71,31 @@ export function AuthContextProvider(props: AuthContextProviderProps) {
     }
   }
 
-  async function updateUserByID(id: string, data: UserType) {
-    const userData = await getUserByID(id);
-
-    const userUpdated = {
-      ...userData,
-      ...data,
-    };
+  async function updateUserByID(
+    id: string,
+    data: UserType
+  ): Promise<UserType | null> {
     try {
-      await setDoc(doc(db, "users", id), userUpdated);
+      const userData = await getUserByID(id);
 
-      setUser(userUpdated);
+      if (userData) {
+        const updatedUser = {
+          ...userData,
+          ...data,
+        };
 
-      return true;
+        await setDoc(doc(db, "users", id), updatedUser);
+
+        return updatedUser;
+      } else {
+        return null;
+      }
     } catch (error) {
       console.error("updateUserByID error", error);
       alert(
         `Houve um erro ao atualizar dados do usuário. Tente novamente mais tarde`
       );
-      return false;
+      return null;
     }
   }
 
@@ -126,49 +132,70 @@ export function AuthContextProvider(props: AuthContextProviderProps) {
   async function getUserByID(id: string) {
     const usersRef = doc(db, "users", id);
     const userSnap = await getDoc(usersRef);
-    const user = userSnap.data();
 
-    return user;
+    if (userSnap.exists()) {
+      const userData = userSnap.data() as DocumentData;
+      const user: UserType = {
+        email: userData.email || "",
+        password: "",
+      };
+      return user;
+    } else {
+      return null;
+    }
   }
 
-  function signInUser(email: string, password: string) {
+  async function signInUser(
+    email: string,
+    password: string
+  ): Promise<SignInResult> {
     if (isStringEmpty(email)) {
       const status = {
         status: false,
         message: "O campo email não foi preenchido",
+        user: undefined,
+        error: true,
       };
       return status;
     }
     if (isStringEmpty(password)) {
       const status = {
+        user: undefined,
+        error: true,
         status: false,
         message: "O campo senha não foi preenchido",
       };
       return status;
     }
 
-    return signInWithEmailAndPassword(authentication, email, password)
-      .then(async (re) => {
-        setIsLogged(true);
-        setKeyLocalStorage("UID", re.user.uid);
-        const currentUser = await getUserByID(re.user.uid);
-        setUser(currentUser);
-        const status = {
-          user: currentUser,
-          status: true,
-        };
-        return status;
-      })
-      .catch((err) => {
-        const status = {
-          status: false,
-          message: AuthErrorHandler(err.code),
-          err,
-        };
+    try {
+      const re = await signInWithEmailAndPassword(
+        authentication,
+        email,
+        password
+      );
+      setIsLogged(true);
+      setKeyLocalStorage("UID", re.user.uid);
+      const currentUser = await getUserByID(re.user.uid);
+      setUser(currentUser as UserType);
+      const status = {
+        user: currentUser as UserType,
+        status: true,
+        message: undefined,
+        error: false,
+      };
+      return status;
+    } catch (err: any) {
+      const status = {
+        user: undefined,
+        status: false,
+        message: AuthErrorHandler(err.code),
+        error: err,
+      };
 
-        console.log("signInUser error", status);
-        return status;
-      });
+      console.error("signInUser error", status);
+      return status;
+    }
   }
 
   async function RegisterUser({ email, password, user }: any) {
@@ -216,7 +243,7 @@ export function AuthContextProvider(props: AuthContextProviderProps) {
         setIsLogged(true);
         setKeyLocalStorage("UID", user.uid);
         const loggedUser = await getUserByID(user.uid);
-        setUser(loggedUser);
+        setUser(loggedUser as UserType);
       } else {
         setIsLogged(false);
       }

@@ -1,3 +1,4 @@
+import { ReactNode } from "react";
 import {
   BrowserRouter,
   Navigate,
@@ -13,8 +14,10 @@ import { Community } from "./pages/Community";
 import { Detail } from "./pages/Detail";
 import { Home } from "./pages/Home";
 
-const ProtectedRoute = ({ element }) => {
-  const { isLogged } = useAuth();
+const ProtectedRoute = ({ element }: { element: ReactNode }) => {
+  const auth = useAuth();
+
+  const isLogged = auth?.isLogged;
 
   return isLogged ? element : <Navigate to="/admin" replace />;
 };
@@ -25,7 +28,7 @@ export function Routes() {
       <Switch>
         <Route path="/" element={<Home />} />
         <Route path="/challenges" element={<Challenges />} />
-        <Route path="/challenge" element={<Detail />} />
+        <Route path="/details/:id" element={<Detail />} />
         <Route path="/devs" element={<Community />} />
         <Route path="/admin" element={<Login />} />
         <Route path="/admin/registration" element={<Registration />} />

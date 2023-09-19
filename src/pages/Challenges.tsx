@@ -14,25 +14,6 @@ import { useChallenges } from "@/hooks/useChallenges";
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const colorMatch = (option: string) => {
-  switch (option) {
-    case "Iniciante":
-      return "nephritis";
-    case "Intermediário":
-      return "pumpkin";
-    case "Avançado":
-      return "pomegranate";
-    case "Mobile":
-      return "blue";
-    case "Front-end":
-      return "red";
-    case "Back-end":
-      return "light-purple";
-    default:
-      return "green";
-  }
-};
-
 export function Challenges() {
   const navigate = useNavigate();
   const { challengesList } = useChallenges();
@@ -62,6 +43,25 @@ export function Challenges() {
       setTypeFilter(queryTypeParam);
     }
   }, [location]);
+
+  const colorMatch = (option: string) => {
+    switch (option) {
+      case "Iniciante":
+        return "bg-green-600";
+      case "Intermediário":
+        return "bg-orange-600";
+      case "Avançado":
+        return "bg-red-600";
+      case "Mobile":
+        return "bg-pink-600";
+      case "Front-end":
+        return "bg-cyan-600";
+      case "Back-end":
+        return "bg-purple-600";
+      default:
+        return "bg-indigo-600";
+    }
+  };
 
   return (
     <>
@@ -140,11 +140,19 @@ export function Challenges() {
               className="relative flex flex-col w-72 h-96 gap-4 bg-zinc-800 rounded overflow-hidden"
             >
               <div className="absolute top-4 left-4 flex flex-col gap-2">
-                <div className="px-4 py-0.5 text-sm font-bold bg-pink-500 flex items-center justify-center rounded-full">
-                  {challenge.type}
+                <div
+                  className={`px-4 py-0.5 text-sm font-bold ${colorMatch(
+                    challenge?.type
+                  )} flex items-center justify-center rounded-full`}
+                >
+                  {challenge?.type}
                 </div>
-                <div className="px-4 py-0.5 text-sm font-bold bg-orange-400 flex items-center justify-center rounded-full">
-                  {challenge.level}
+                <div
+                  className={`px-4 py-0.5 text-sm font-bold ${colorMatch(
+                    challenge?.level
+                  )} flex items-center justify-center rounded-full`}
+                >
+                  {challenge?.level}
                 </div>
               </div>
 
@@ -152,7 +160,7 @@ export function Challenges() {
                 {challenge.techs.map((item) => (
                   <div
                     key={`${item}-${challenge.id}`}
-                    className="px-4 py-0.5 text-sm font-bold bg-gray-500 flex items-center justify-center rounded-full"
+                    className="px-4 py-0.5 text-sm font-bold bg-gray-700 flex items-center justify-center rounded-full"
                   >
                     {item}
                   </div>

@@ -1,9 +1,20 @@
 import FooterSite from "@/components/FooterSite";
 import HeaderSite from "@/components/HeaderSite";
 import { Button } from "@/components/ui/button";
+import { useChallenges } from "@/hooks/useChallenges";
+import { useMemo } from "react";
 import { FaCheck, FaGithub, FaLinkedin } from "react-icons/fa";
+import { useParams } from "react-router-dom";
 
 export function Detail() {
+  let { id } = useParams();
+  let { challengesList } = useChallenges();
+
+  const challenge = useMemo(() => {
+    const response = challengesList.filter((item) => item.id === id);
+    return response[0];
+  }, [id, challengesList]);
+
   const includes = [
     {
       id: 1,
@@ -43,42 +54,64 @@ export function Detail() {
     },
   ];
 
+  const colorMatch = (option: string) => {
+    switch (option) {
+      case "Iniciante":
+        return "bg-green-600";
+      case "Intermediário":
+        return "bg-orange-600";
+      case "Avançado":
+        return "bg-red-600";
+      case "Mobile":
+        return "bg-pink-600";
+      case "Front-end":
+        return "bg-cyan-600";
+      case "Back-end":
+        return "bg-purple-600";
+      default:
+        return "bg-indigo-600";
+    }
+  };
+
   return (
     <>
       <HeaderSite />
       <div className="container mx-auto p-4 flex flex-col">
         <div className="flex flex-row md:flex-column gap-4 px-4 py-10">
           <div className="flex flex-1 flex-col gap-4">
-            <h2 className="text-4xl text-yellow-400 font-bold">Titulo</h2>
+            <h2 className="text-4xl text-yellow-400 font-bold">
+              {challenge?.name}
+            </h2>
 
-            <div className="flex flex-row gap-2">
-              <div className="px-4 py-0.5 text-sm font-bold bg-pink-500 flex items-center justify-center rounded-full">
-                Tech
+            <div className="flex flex-row gap-2 flex-wrap">
+              <div
+                className={`px-4 py-0.5 text-sm font-bold ${colorMatch(
+                  challenge?.type
+                )} flex items-center justify-center rounded-full`}
+              >
+                {challenge?.type}
               </div>
-              <div className="px-4 py-0.5 text-sm font-bold bg-orange-400 flex items-center justify-center rounded-full">
-                Intermediario
+              <div
+                className={`px-4 py-0.5 text-sm font-bold ${colorMatch(
+                  challenge?.level
+                )} flex items-center justify-center rounded-full`}
+              >
+                {challenge?.level}
               </div>
-              <div className="px-4 py-0.5 text-sm font-bold bg-gray-500 flex items-center justify-center rounded-full">
-                React Native
-              </div>
-              <div className="px-4 py-0.5 text-sm font-bold bg-gray-500 flex items-center justify-center rounded-full">
-                React JS
-              </div>
+              {challenge?.techs.map((tech, index) => (
+                <div
+                  key={index}
+                  className="px-4 py-0.5 text-sm font-bold bg-gray-700 flex items-center justify-center rounded-full"
+                >
+                  {tech}
+                </div>
+              ))}
             </div>
 
-            <p className="text-sm text-white">
-              dummy text of the printing and typesetting industry. Lorem Ipsum
-              has been the industry's standard dummy text ever since the 1500s,
-              when an unknown printer took a galley of type and scrambled it to
-              make a type specimen book. It has survived not only five
-              centuries, but also the leap into electronic typesetting,
-              remaining essentially unchanged. It was popularised in the 1960s
-              with the release of Letraset sheets containing Lorem Ipsum
-              passages, and more recently with desktop publishing software like
-              Aldus PageMaker including versions of Lorem Ipsum.
-            </p>
+            <p className="text-sm text-white">{challenge?.description}</p>
 
             <Button
+              onClick={() => window.open(challenge?.githubRepository, "_blank")}
               size="lg"
               className="w-full bg-purple-800 text-white hover:bg-purple-500 rounded-full"
             >
@@ -88,7 +121,7 @@ export function Detail() {
           <div className="flex flex-1 flex-col gap-4">
             <img
               className="w-full h-full rounded object-cover"
-              src="https://github.com/filipeleonelbatista.png"
+              src={challenge?.background}
             />
           </div>
         </div>
@@ -105,7 +138,7 @@ export function Detail() {
                 O Que está incluso?
               </h4>
 
-              {"" === "Backend" ? (
+              {challenge?.type === "Back-end" ? (
                 <span>
                   Readme com instruções de requisitos e as rotas da aplicação
                 </span>
@@ -140,21 +173,21 @@ export function Detail() {
           <div className="flex flex-row p-4 bg-gray-800 rounded w-96 items-center justify-between gap-4">
             <div className="flex flex-row items-center gap-4">
               <img
-                src="https://github.com/filipeleonelbatista.png"
+                src={`https://github.com/${challenge?.username}.png`}
                 className="w-16 h-16 rounded-full"
               />
               <div>
-                <p className="text-md text-white">filipeleonelbatista</p>
+                <p className="text-md text-white">{challenge?.username}</p>
 
                 <p className="text-sm text-yellow-400">Desenvolvedor</p>
               </div>
             </div>
             <div className="flex flex-col items-center gap-2">
-              <a>
+              <a href={`https://github.com/${challenge?.username}`}>
                 <FaGithub className="w-7 h-7 mr-2 text-white hover:text-yellow-400" />
               </a>
 
-              <a>
+              <a href={`https://linkedin.com/in/${challenge?.username}`}>
                 <FaLinkedin className="w-7 h-7 mr-2 text-white hover:text-yellow-400" />
               </a>
             </div>

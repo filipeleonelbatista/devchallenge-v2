@@ -6,16 +6,13 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useAuth } from "@/hooks/useAuth";
 import { useFormik } from "formik";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
-import secureLocalStorage from "react-secure-storage";
 import * as Yup from "yup";
 
 interface LoginForm {
   email: string;
   password: string;
-  remember: boolean;
 }
 
 export function Registration() {
@@ -25,8 +22,7 @@ export function Registration() {
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
-  const { signInUser } = useAuth();
-  const navigate = useNavigate();
+  const auth = useAuth();
 
   const formSchema = useMemo(() => {
     return Yup.object().shape({
@@ -34,7 +30,6 @@ export function Registration() {
       password: Yup.string()
         .min(6, "A senha deve ter pelo menos 6 caracteres")
         .required("A senha é obrigatória"),
-      remember: Yup.boolean(),
     });
   }, []);
 
@@ -42,7 +37,6 @@ export function Registration() {
     initialValues: {
       email: "",
       password: "",
-      remember: false,
     },
     validationSchema: formSchema,
     onSubmit: (values: LoginForm) => {
@@ -53,20 +47,26 @@ export function Registration() {
   const handleSubmitForm = async (formValues: LoginForm) => {
     try {
       setIsLoading(true);
-      if (formValues.remember) {
-        secureLocalStorage.setItem(
-          "remember",
-          JSON.stringify({
+
+      if (auth && auth.RegisterUser) {
+        if (
+          await auth.RegisterUser({
             email: formValues.email,
             password: formValues.password,
+            user: {
+              email: formValues.email,
+              password: formValues.password,
+            },
           })
-        );
-      }
-      const isLogged = await signInUser(formValues.email, formValues.password);
-      if (isLogged.status) {
-        navigate("/admin/inicio");
-      } else {
-        alert(isLogged.message);
+        ) {
+          alert(
+            "Solicite a liberação do usuário para o administrador do sistema"
+          );
+        } else {
+          alert(
+            "Houve um problema ao solicitar seu acesso"
+          );
+        }
       }
     } catch (error) {
       console.log("error", error);
@@ -74,22 +74,6 @@ export function Registration() {
       setIsLoading(false);
     }
   };
-
-  useEffect(() => {
-    const executeAsync = async () => {
-      const response = secureLocalStorage.getItem("remember");
-      if (response) {
-        const user = JSON.parse(response);
-        const isLogged = await signInUser(user.email, user.password);
-        if (isLogged.status) {
-          navigate("/admin/inicio");
-        } else {
-          alert(isLogged.message);
-        }
-      }
-    };
-    executeAsync();
-  }, []);
 
   return (
     <div className="container relative hidden h-[800px] flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">

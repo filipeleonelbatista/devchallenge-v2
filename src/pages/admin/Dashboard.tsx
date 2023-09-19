@@ -39,6 +39,7 @@ import { useFormik } from "formik";
 import { useMemo, useState } from "react";
 
 import { GoVideo } from "react-icons/go";
+import { randomUUID } from "crypto";
 
 interface FormType {
   name: string;
@@ -116,6 +117,7 @@ export function Dashboard() {
       : "";
 
     const data = {
+      id: randomUUID(),
       type: formValues.type,
       level: formValues.level,
       techs: formValues.techs,

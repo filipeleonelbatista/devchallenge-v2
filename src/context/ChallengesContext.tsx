@@ -1,6 +1,5 @@
 /* eslint-disable no-restricted-globals */
 import {
-  addDoc,
   collection,
   deleteDoc,
   doc,
@@ -57,7 +56,7 @@ interface ChallengesContextProviderProps {
 }
 
 export interface Challenge {
-  id?: string;
+  id: string;
   type: string;
   level: string;
   techs: string[];
@@ -104,11 +103,25 @@ export function ChallengesContextProvider(
     const contactsRef = collection(db, "challenges");
     const result = getDocs(query(contactsRef, orderBy("createdAt", "desc")))
       .then((snap) => {
-        let challengeList = [] as Challenge[];
+        let currentChallegeList = [] as Challenge[];
         snap.docs.forEach((doc) => {
-          challengeList.push({ ...doc.data(), id: doc.id });
+          const challengeData = doc.data();
+          const challenge: Challenge = {
+            id: doc.id,
+            type: challengeData.type || "",
+            level: challengeData.level || "",
+            techs: challengeData.techs || [],
+            githubRepository: challengeData.githubRepository || "",
+            username: challengeData.username || "",
+            background: challengeData.background || "",
+            name: challengeData.name || "",
+            description: challengeData.description || "",
+            createdAt: challengeData.createdAt || 0,
+            active: challengeData.active || false,
+          };
+          currentChallegeList.push(challenge);
         });
-        return challengeList;
+        return currentChallegeList;
       })
       .catch((error) => {
         console.log("getAllChallenges error", error);
@@ -121,8 +134,12 @@ export function ChallengesContextProvider(
   async function getChallengeByID(id: string) {
     const challengeRef = doc(db, "challenges", id);
     const challengeSnap = await getDoc(challengeRef);
-    const challenge = challengeSnap.data();
-    return challenge;
+    if (challengeSnap.exists()) {
+      const challengeData = challengeSnap.data() as Challenge;
+      return { ...challengeData, id };
+    } else {
+      return undefined;
+    }
   }
 
   async function updateChallenge(data: Challenge) {
@@ -132,8 +149,10 @@ export function ChallengesContextProvider(
   }
 
   async function addChallenge(data: Challenge) {
-    const challengeRef = collection(db, "challenges");
-    await addDoc(challengeRef, data);
+    // const challengeRef = collection(db, "challenges");
+    // await addDoc(challengeRef, data);
+    const challengeRef = doc(db, "challenges", data.id);
+    await setDoc(challengeRef, data);
 
     await updateChallengesList();
   }
@@ -145,7 +164,7 @@ export function ChallengesContextProvider(
     if (response) {
       const challenge = await getChallengeByID(id);
       if (challenge) {
-        deleteImageFromStorage(challenge.avatar);
+        deleteImageFromStorage(challenge.background);
         await deleteDoc(doc(db, "challenges", id));
       }
     }

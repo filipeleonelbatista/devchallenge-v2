@@ -26,7 +26,7 @@ export function Login() {
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
-  const { signInUser } = useAuth();
+  const auth = useAuth();
   const navigate = useNavigate();
 
   const formSchema = useMemo(() => {
@@ -63,11 +63,18 @@ export function Login() {
           })
         );
       }
-      const isLogged = await signInUser(formValues.email, formValues.password);
-      if (isLogged.status) {
-        navigate("/admin/inicio");
+      if (auth && auth.signInUser) {
+        const isLogged = await auth.signInUser(
+          formValues.email,
+          formValues.password
+        );
+        if (isLogged.status) {
+          navigate("/admin/inicio");
+        } else {
+          alert(isLogged.message);
+        }
       } else {
-        alert(isLogged.message);
+        alert("Houve um problema ao carregar informações, tente mais tarde!");
       }
     } catch (error) {
       console.log("error", error);
@@ -78,14 +85,21 @@ export function Login() {
 
   useEffect(() => {
     const executeAsync = async () => {
-      const response = secureLocalStorage.getItem("remember");
+      const response = secureLocalStorage.getItem("remember") as string;
       if (response) {
-        const user = JSON.parse(response);
-        const isLogged = await signInUser(user.email, user.password);
-        if (isLogged.status) {
-          navigate("/admin/inicio");
+        const user = JSON.parse(response) as {
+          email: string;
+          password: string;
+        };
+        if (auth && auth.signInUser) {
+          const isLogged = await auth.signInUser(user.email, user.password);
+          if (isLogged.status) {
+            navigate("/admin/inicio");
+          } else {
+            alert(isLogged.message);
+          }
         } else {
-          alert(isLogged.message);
+          alert("Houve um problema ao carregar informações, tente mais tarde!");
         }
       }
     };
