@@ -23,15 +23,14 @@ export function Routes() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/" exact element={<Home />} />
-        <Route path="/challenges" exact element={<Challenges />} />
-        <Route path="/challenge" exact element={<Detail />} />
-        <Route path="/devs" exact element={<Community />} />
-        <Route path="/admin" exact element={<Login />} />
-        <Route path="/admin/registration" exact element={<Registration />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/challenges" element={<Challenges />} />
+        <Route path="/challenge" element={<Detail />} />
+        <Route path="/devs" element={<Community />} />
+        <Route path="/admin" element={<Login />} />
+        <Route path="/admin/registration" element={<Registration />} />
         <Route
           path="/admin/inicio"
-          exact
           element={<ProtectedRoute element={<Dashboard />} />}
         />
       </Switch>
