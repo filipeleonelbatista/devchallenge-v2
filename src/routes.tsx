@@ -6,6 +6,7 @@ import {
   Routes as Switch,
 } from "react-router-dom";
 import { useAuth } from "./hooks/useAuth";
+import { About } from "./pages/About";
 import { Dashboard } from "./pages/admin/Dashboard";
 import { Login } from "./pages/admin/Login";
 import { Registration } from "./pages/admin/Registration";
@@ -28,6 +29,7 @@ export function Routes() {
     <BrowserRouter>
       <Switch>
         <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
         <Route path="/hacktoberfest" element={<Hacktoberfest />} />
         <Route path="/challenges" element={<Challenges />} />
         <Route path="/details/:id" element={<Detail />} />

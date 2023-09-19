@@ -23,6 +23,16 @@ export default function HeaderSite() {
               Inicio
             </Link>
             <Link
+              to="/about"
+              className={`text-sm font-medium ${
+                location.pathname === "/about"
+                  ? "text-yellow-400"
+                  : "text-muted-foreground"
+              } transition-colors hover:text-yellow-600`}
+            >
+              Sobre nós
+            </Link>
+            <Link
               to="/challenges"
               className={`text-sm font-medium ${
                 location.pathname === "/challenges"
