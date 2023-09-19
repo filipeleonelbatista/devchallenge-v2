@@ -28,7 +28,7 @@ import { GoLightBulb } from "react-icons/go";
 import * as Yup from "yup";
 
 import { GoVideo } from "react-icons/go";
-import { randomUUID } from "crypto";
+import { v4 } from "uuid";
 
 interface FormType {
   name: string;
@@ -95,7 +95,7 @@ export function Community() {
       : "";
 
     const data = {
-      id: randomUUID(),
+      id: v4(),
       type: formValues.type,
       level: formValues.level,
       techs: formValues.techs,
