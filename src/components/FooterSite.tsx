@@ -8,12 +8,20 @@ export default function FooterSite() {
       <div className="border-t">
         <div className="flex flex-col gap-4 md:flex-row h-16 items-center px-4 py-16">
           <nav className="flex items-center space-x-4 mx-6 flex items-center space-x-4 lg:space-x-6">
-            <Link href="/challenges">
+            <a
+              href="https://discord.gg/yvYXhGj"
+              target="_blank"
+              rel="nofollow noreferer noopener"
+            >
               <FaDiscord className="w-6 h-6 text-sm font-medium text-muted-foreground transition-colors hover:text-yellow-400" />
-            </Link>
-            <Link href="/challenges">
+            </a>
+            <a
+              href="https://github.com/filipeleonelbatista/devchallenge-v2"
+              target="_blank"
+              rel="nofollow noreferer noopener"
+            >
               <FaGithub className="w-6 h-6 text-sm font-medium text-muted-foreground transition-colors hover:text-yellow-400" />
-            </Link>
+            </a>
           </nav>
 
           <div className="flex-1 text-center items-center justify-center">

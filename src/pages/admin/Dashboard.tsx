@@ -2,8 +2,8 @@ import FooterSite from "@/components/FooterSite";
 import Header from "@/components/Header";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { useNavigate } from "react-router-dom";
 import { FaCheck, FaTimes, FaTrash } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 
 import {
@@ -19,18 +19,13 @@ import {
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
 
-import { useChallenges } from "@/hooks/useChallenges";
-import { useMemo, useState } from "react";
-import { useFormik } from "formik";
-import { uploadImageAsync } from "@/context/ChallengesContext";
-import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import {
   Select,
   SelectContent,
@@ -39,6 +34,10 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import { uploadImageAsync } from "@/context/ChallengesContext";
+import { useChallenges } from "@/hooks/useChallenges";
+import { useFormik } from "formik";
+import { useMemo, useState } from "react";
 
 import { GoVideo } from "react-icons/go";
 
@@ -121,6 +120,8 @@ export function Dashboard() {
     };
 
     await addChallenge(data);
+
+    document.getElementById("dialog-close")?.click();
   };
 
   return (

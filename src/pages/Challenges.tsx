@@ -10,8 +10,59 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
+import { useChallenges } from "@/hooks/useChallenges";
+import { useEffect, useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+const colorMatch = (option) => {
+  switch (option) {
+    case "Iniciante":
+      return "nephritis";
+    case "Intermediário":
+      return "pumpkin";
+    case "Avançado":
+      return "pomegranate";
+    case "Mobile":
+      return "blue";
+    case "Front-end":
+      return "red";
+    case "Back-end":
+      return "light-purple";
+    default:
+      return "green";
+  }
+};
 
 export function Challenges() {
+  const navigate = useNavigate();
+  const { challengesList } = useChallenges();
+
+  const [languageFilter, setLanguageFilter] = useState("");
+  const [typeFilter, setTypeFilter] = useState("");
+
+  const filteredChallenges = useMemo(() => {
+    const activeOnly = challengesList.filter((item) => item.active);
+
+    const languageFiltered =
+      languageFilter === ""
+        ? activeOnly
+        : activeOnly.filter((item) => item.techs.includes(languageFilter));
+
+    const typeFiltered =
+      typeFilter === ""
+        ? languageFiltered
+        : languageFiltered.filter((item) => item.type === typeFilter);
+
+    return typeFiltered;
+  }, [challengesList, languageFilter, typeFilter]);
+
+  useEffect(() => {
+    if (location.search.includes("?type=")) {
+      const queryTypeParam = location.search.replace("?type=", "");
+      setTypeFilter(queryTypeParam);
+    }
+  }, [location]);
+
   return (
     <>
       <HeaderSite />
@@ -21,7 +72,11 @@ export function Challenges() {
           <div className="flex gap-4 ml-auto">
             <div className="space-y-2 w-32">
               <Label htmlFor="category">Categorias</Label>
-              <Select id="category" onValueChange={() => {}}>
+              <Select
+                id="category"
+                value={typeFilter}
+                onValueChange={(value) => setTypeFilter(value)}
+              >
                 <SelectTrigger>
                   <SelectValue placeholder="Categoria" />
                 </SelectTrigger>
@@ -35,7 +90,11 @@ export function Challenges() {
 
             <div className="space-y-2 w-32">
               <Label htmlFor="languages">Linguagens</Label>
-              <Select id="languages" onValueChange={() => {}}>
+              <Select
+                id="languages"
+                value={languageFilter}
+                onValueChange={(value) => setLanguageFilter(value)}
+              >
                 <SelectTrigger>
                   <SelectValue placeholder="Linguagens" />
                 </SelectTrigger>
@@ -55,108 +114,81 @@ export function Challenges() {
         </div>
         <Separator />
         <main className="flex gap-4 flex-wrap py-4 justify-center">
-          <div className="relative flex flex-col w-72 h-96 gap-4 bg-zinc-800 rounded overflow-hidden">
-            <div className="absolute top-4 left-4 flex flex-col gap-2">
-              <div className="px-4 py-0.5 text-sm font-bold bg-pink-500 flex items-center justify-center rounded-full">
-                Tech
+          {filteredChallenges.length === 0 && challengesList.length > 0 && (
+            <div className="flex flex-col gap-4 py-10 items-center">
+              <div className="flex gap-2 items-center justify-center bg-yellow-400 w-20 h-20 rounded-sm">
+                <p className="text-6xl font-bold text-black">D</p>
               </div>
-              <div className="px-4 py-0.5 text-sm font-bold bg-orange-400 flex items-center justify-center rounded-full">
-                Intermediario
-              </div>
-            </div>
-
-            <div className="absolute top-4 right-4">
-              <div className="px-4 py-0.5 text-sm font-bold bg-gray-500 flex items-center justify-center rounded-full">
-                React Native
-              </div>
-            </div>
-            <img
-              className="w-full h-44 object-cover"
-              src="https://github.com/filipeleonelbatista.png"
-            />
-            <div className="h-full flex flex-col gap-4 px-4 pb-4 items-center justify-between">
-              <h3 className="text-2xl text-white">Desafio</h3>
-
-              <p className="text-sm text-white">
-                Com desafios de front-end, back-end e mobile
+              <p className="text-muted-foreground">
+                Sem desafios nessa categoria no momento!
               </p>
-
-              <Button
-                size="lg"
-                className="w-full bg-purple-800 text-white hover:bg-purple-500 rounded-full"
-              >
-                Ver detalhes
-              </Button>
             </div>
-          </div>
-          <div className="relative flex flex-col w-72 h-96 gap-4 bg-zinc-800 rounded overflow-hidden">
-            <div className="absolute top-4 left-4 flex flex-col gap-2">
-              <div className="px-4 py-0.5 text-sm font-bold bg-pink-500 flex items-center justify-center rounded-full">
-                Tech
-              </div>
-              <div className="px-4 py-0.5 text-sm font-bold bg-orange-400 flex items-center justify-center rounded-full">
-                Intermediario
-              </div>
-            </div>
+          )}
 
-            <div className="absolute top-4 right-4">
-              <div className="px-4 py-0.5 text-sm font-bold bg-gray-500 flex items-center justify-center rounded-full">
-                React Native
+          {filteredChallenges.length === 0 && challengesList.length === 0 && (
+            <div className="flex flex-col gap-4 py-10 items-center">
+              <div className="flex gap-2 items-center justify-center bg-yellow-400 w-20 h-20 rounded-sm">
+                <p className="text-6xl font-bold text-black">D</p>
               </div>
-            </div>
-            <img
-              className="w-full h-44 object-cover"
-              src="https://github.com/filipeleonelbatista.png"
-            />
-            <div className="h-full flex flex-col gap-4 px-4 pb-4 items-center justify-between">
-              <h3 className="text-2xl text-white">Desafio</h3>
-
-              <p className="text-sm text-white">
-                Com desafios de front-end, back-end e mobile
+              <p className="text-muted-foreground">
+                Sem desafios nessa no momento!
               </p>
-
-              <Button
-                size="lg"
-                className="w-full bg-purple-800 text-white hover:bg-purple-500 rounded-full"
-              >
-                Ver detalhes
-              </Button>
             </div>
-          </div>
-          <div className="relative flex flex-col w-72 h-96 gap-4 bg-zinc-800 rounded overflow-hidden">
-            <div className="absolute top-4 left-4 flex flex-col gap-2">
-              <div className="px-4 py-0.5 text-sm font-bold bg-pink-500 flex items-center justify-center rounded-full">
-                Tech
+          )}
+
+          {filteredChallenges.map((challenge) => (
+            <div
+              key={challenge.id}
+              className="relative flex flex-col w-72 h-96 gap-4 bg-zinc-800 rounded overflow-hidden"
+            >
+              <div className="absolute top-4 left-4 flex flex-col gap-2">
+                <div className="px-4 py-0.5 text-sm font-bold bg-pink-500 flex items-center justify-center rounded-full">
+                  {challenge.type}
+                </div>
+                <div className="px-4 py-0.5 text-sm font-bold bg-orange-400 flex items-center justify-center rounded-full">
+                  {challenge.level}
+                </div>
               </div>
-              <div className="px-4 py-0.5 text-sm font-bold bg-orange-400 flex items-center justify-center rounded-full">
-                Intermediario
+
+              <div className="absolute top-4 right-4 flex flex-col gap-1">
+                {challenge.techs.map((item) => (
+                  <div
+                    key={`${item}-${challenge.id}`}
+                    className="px-4 py-0.5 text-sm font-bold bg-gray-500 flex items-center justify-center rounded-full"
+                  >
+                    {item}
+                  </div>
+                ))}
+              </div>
+              <img
+                onClick={() => navigate(`/details/${challenge.id}`)}
+                className="w-full h-44 aspect-video cursor-pointer"
+                src={challenge.background}
+              />
+              <div className="h-full flex flex-col gap-4 px-4 pb-4 items-center justify-between">
+                <h3
+                  className="text-2xl text-white cursor-pointer"
+                  onClick={() => navigate(`/details/${challenge.id}`)}
+                >
+                  {challenge.name}
+                </h3>
+
+                <p className="text-sm text-white">
+                  {challenge.description.length > 120
+                    ? challenge.description.substr(0, 120) + "..."
+                    : challenge.description}
+                </p>
+
+                <Button
+                  onClick={() => navigate(`/details/${challenge.id}`)}
+                  size="lg"
+                  className="w-full bg-purple-800 text-white hover:bg-purple-500 rounded-full"
+                >
+                  Ver detalhes
+                </Button>
               </div>
             </div>
-
-            <div className="absolute top-4 right-4">
-              <div className="px-4 py-0.5 text-sm font-bold bg-gray-500 flex items-center justify-center rounded-full">
-                React Native
-              </div>
-            </div>
-            <img
-              className="w-full h-44 object-cover"
-              src="https://github.com/filipeleonelbatista.png"
-            />
-            <div className="h-full flex flex-col gap-4 px-4 pb-4 items-center justify-between">
-              <h3 className="text-2xl text-white">Desafio</h3>
-
-              <p className="text-sm text-white">
-                Com desafios de front-end, back-end e mobile
-              </p>
-
-              <Button
-                size="lg"
-                className="w-full bg-purple-800 text-white hover:bg-purple-500 rounded-full"
-              >
-                Ver detalhes
-              </Button>
-            </div>
-          </div>
+          ))}
         </main>
       </div>
       <FooterSite />
