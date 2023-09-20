@@ -3,7 +3,7 @@ import HeaderSite from "@/components/HeaderSite";
 import { Button } from "@/components/ui/button";
 import { useChallenges } from "@/hooks/useChallenges";
 import { useMemo } from "react";
-import { FaCheck, FaGithub, FaLinkedin } from "react-icons/fa";
+import { FaCheck, FaGithub } from "react-icons/fa";
 import { useParams } from "react-router-dom";
 
 export function Detail() {
