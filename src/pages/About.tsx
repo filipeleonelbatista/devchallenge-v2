@@ -1,3 +1,4 @@
+import DevAnimation from "@/assets/animations/dev.json";
 import FooterSite from "@/components/FooterSite";
 import HeaderSite from "@/components/HeaderSite";
 import { Button } from "@/components/ui/button";
@@ -9,11 +10,8 @@ import { AiOutlineCode } from "react-icons/ai";
 import { BsFolderCheck } from "react-icons/bs";
 import { FaDiscord } from "react-icons/fa";
 import { SlScreenDesktop } from "react-icons/sl";
-import { useNavigate } from "react-router-dom";
-import DevAnimation from "@/assets/animations/dev.json";
 
 export function About() {
-  const navigate = useNavigate();
   const [email, setEmail] = useState("");
 
   async function handleSubscribe(e: any) {
