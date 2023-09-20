@@ -109,7 +109,7 @@ export function Community() {
     };
 
     await addChallenge(data);
-
+    formik.resetForm();
     document.getElementById("dialog-close")?.click();
   };
 
