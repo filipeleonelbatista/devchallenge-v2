@@ -7,6 +7,7 @@ import { Player } from "@lottiefiles/react-lottie-player";
 import { useState } from "react";
 import { IoCodeSlash, IoSearch, IoShareSocialOutline } from "react-icons/io5";
 import { SlScreenDesktop, SlScreenSmartphone } from "react-icons/sl";
+import { BsStack } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom";
 
 export function Home() {
@@ -72,7 +73,7 @@ export function Home() {
             to="/challenges?type=Full Stack"
             className="cursor-pointer w-64 p-16 bg-zinc-900 hover:bg-zinc-700 rounded flex flex-col gap-2 items-center justify-center"
           >
-            <SlScreenSmartphone className="w-12 h-12 text-yellow-400" />
+            <BsStack className="w-12 h-12 text-yellow-400" />
             <p className="font-bold">Full Stack</p>
           </Link>
         </div>
