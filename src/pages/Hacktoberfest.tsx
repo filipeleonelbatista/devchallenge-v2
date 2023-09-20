@@ -1,4 +1,5 @@
-import HacktoberfestBanner from "@/assets/hacktoberfest.png";
+import HacktoberfestLogo from "@/assets/hacktoberfest/hacktoberfest-logo.png";
+import HacktoberfestIcon from "@/assets/hacktoberfest/icon.png";
 import DiscordAnimation from "@/assets/animations/discord.json";
 import FooterSite from "@/components/FooterSite";
 import HeaderSite from "@/components/HeaderSite";
@@ -99,7 +100,16 @@ export function Hacktoberfest() {
         <div className="py-16 items-center justify-center flex flex-col gap-4">
           <div className="flex flex-col items-center justify-center">
             <h2 className="text-3xl text-center font-bold leading-relaxed typewriter">
-              Junte-se ao Hacktoberfest e{" "}
+              Junte-se ao{" "}
+              <a
+                href="https://hacktoberfest.com/"
+                target="_blank"
+                rel="nofollow noreferer noopener"
+                className="font-bold uppercase hacktoberfont"
+              >
+                Hacktoberfest
+              </a>{" "}
+              e{" "}
             </h2>
             <h2 className="text-3xl text-center font-bold leading-relaxed typewriter">
               Fortaleça Sua Jornada no{" "}
@@ -116,7 +126,16 @@ export function Hacktoberfest() {
             </h2>
           </div>
           <p className="text-white max-w-2xl mt-10 text-center">
-            O Hacktoberfest está chegando, e o{" "}
+            O{" "}
+            <a
+              href="https://hacktoberfest.com/"
+              target="_blank"
+              rel="nofollow noreferer noopener"
+              className="font-bold uppercase hacktoberfont"
+            >
+              Hacktoberfest
+            </a>{" "}
+            está chegando, e o{" "}
             <a
               href="https://discord.gg/yvYXhGj"
               target="_blank"
@@ -269,40 +288,88 @@ export function Hacktoberfest() {
         <div className="flex flex-row py-28 items-center justify-center gap-8">
           <div className="flex flex-col gap-2 max-w-xs space-y-2">
             <p className="text-4xl text-yellow-400 font-bold">
-              O que é o Hacktoberfest!
+              O que é o
+              <a
+                href="https://hacktoberfest.com/"
+                target="_blank"
+                rel="nofollow noreferer noopener"
+                className="font-bold uppercase hacktoberfont"
+              >
+                {" "}
+                Hacktoberfest
+              </a>
+              !
             </p>
             <p className="text-white">
-              O Hacktoberfest é um mês inteiro dedicado à celebração da
-              comunidade de código aberto. Durante outubro, desenvolvedores de
-              todo o mundo se reúnem para contribuir com projetos de código
-              aberto. A melhor parte? Você pode ganhar prêmios incríveis
-              simplesmente participando e contribuindo!
+              O{" "}
+              <a
+                href="https://hacktoberfest.com/"
+                target="_blank"
+                rel="nofollow noreferer noopener"
+                className="font-bold uppercase hacktoberfont"
+              >
+                Hacktoberfest
+              </a>{" "}
+              é um mês inteiro dedicado à celebração da comunidade de código
+              aberto. Durante outubro, desenvolvedores de todo o mundo se reúnem
+              para contribuir com projetos de código aberto. A melhor parte?
+              Você pode ganhar prêmios incríveis simplesmente participando e
+              contribuindo!
             </p>
             <a
-              href="https://discord.gg/yvYXhGj"
+              href="https://hacktoberfest.com/"
               target="_blank"
               rel="nofollow noreferer noopener"
-              className={`flex flex-row items-center justify-center text-sm font-medium bg-yellow-400 transition-colors hover:bg-yellow-600 animate-pulse text-black px-6 py-2 rounded-full`}
+              className={`hacktoberfont flex flex-row items-center justify-center text-sm font-medium bg-transparent border border-yellow-400 transition-colors hover:borer-yellow-600 animate-pulse text-yellow-400 px-6 py-2 rounded-full`}
             >
-              <FaDiscord className="w-4 h-4 text-black mr-2" />
-              Entre na comunidade
+              <img
+                src={HacktoberfestIcon}
+                alt="hacktoberfest icon"
+                className="w-6 h-6 text-black mr-2"
+              />
+              Registre-se no evento!
             </a>
           </div>
-          <Player
-            autoplay={true}
-            controls={false}
-            loop={true}
-            src={DiscordAnimation}
-            style={{ height: "300px", width: "300px" }}
-          />
+
+          <a
+            href="https://hacktoberfest.com/"
+            target="_blank"
+            rel="nofollow noreferer noopener"
+          >
+            <img
+              src={HacktoberfestLogo}
+              alt="HACKTOBERFEST LOGO"
+              className="w-82 h-96"
+            />
+          </a>
         </div>
 
         <div className="flex py-8 w-full flex-col items-center justify-center gap-2">
           <h3 className="text-2xl font-bold text-yellow-400 max-w-3xl">
-            🤔 Por que escolher o DevChallenge para o Hacktoberfest?
+            🤔 Por que escolher o DevChallenge para o
+            <a
+              href="https://hacktoberfest.com/"
+              target="_blank"
+              rel="nofollow noreferer noopener"
+              className="font-bold uppercase hacktoberfont"
+            >
+              {" "}
+              Hacktoberfest
+            </a>
+            ?
           </h3>
           <p className="text-white max-w-2xl text-center">
-            Quando você se junta ao Hacktoberfest por meio do{" "}
+            Quando você se junta ao
+            <a
+              href="https://hacktoberfest.com/"
+              target="_blank"
+              rel="nofollow noreferer noopener"
+              className="font-bold uppercase hacktoberfont"
+            >
+              {" "}
+              Hacktoberfest
+            </a>{" "}
+            por meio do{" "}
             <a
               href="https://discord.gg/yvYXhGj"
               target="_blank"
@@ -315,9 +382,20 @@ export function Hacktoberfest() {
             , está entrando em uma comunidade apaixonada por desenvolvimento de
             software. Nossa plataforma oferece desafios de programação do mundo
             real, projetos bem documentados e uma comunidade de desenvolvedores
-            engajados. Aqui está o que você ganha ao escolher o DevChallenge:
+            engajados. Aqui está o que você ganha ao escolher o{" "}
+            <a
+              href="https://discord.gg/yvYXhGj"
+              target="_blank"
+              rel="nofollow noreferer noopener"
+            >
+              <b>
+                <span className="text-yellow-400">Dev</span>Challenge
+              </b>
+            </a>{" "}
+            :
           </p>
         </div>
+
         <div className="py-16 w-full items-center justify-center flex">
           <div className="max-w-6xl items-center justify-center grid xs:grid-rows-4 md:grid-cols-4 gap-4">
             <div className="cursor-pointer w-full md:h-[310px] p-4 bg-zinc-900 hover:bg-zinc-700 rounded flex flex-col gap-2 items-center justify-start">
@@ -348,8 +426,27 @@ export function Hacktoberfest() {
               <IoShirtOutline className="w-12 h-12 text-yellow-400" />
               <p className="font-bold text-center">Prêmios e Reconhecimento</p>
               <p className="text-white text-center">
-                Além das recompensas do Hacktoberfest, o DevChallenge oferece
-                reconhecimento especial para os membros mais ativos.
+                Além das recompensas do
+                <a
+                  href="https://hacktoberfest.com/"
+                  target="_blank"
+                  rel="nofollow noreferer noopener"
+                  className="font-bold uppercase hacktoberfont"
+                >
+                  {" "}
+                  Hacktoberfest
+                </a>
+                , o{" "}
+                <a
+                  href="https://discord.gg/yvYXhGj"
+                  target="_blank"
+                  rel="nofollow noreferer noopener"
+                >
+                  <b>
+                    <span className="text-yellow-400">Dev</span>Challenge
+                  </b>
+                </a>{" "}
+                oferece reconhecimento especial para os membros mais ativos.
               </p>
             </div>
           </div>
@@ -390,7 +487,17 @@ export function Hacktoberfest() {
               <h4 className="text-2xl text-purple-600 font-bold">Bora?!</h4>
 
               <p className="text-white">
-                Junte-se ao Hacktoberfest através do{" "}
+                Junte-se ao
+                <a
+                  href="https://hacktoberfest.com/"
+                  target="_blank"
+                  rel="nofollow noreferer noopener"
+                  className="font-bold uppercase hacktoberfont"
+                >
+                  {" "}
+                  Hacktoberfest
+                </a>{" "}
+                através do{" "}
                 <a
                   href="https://discord.gg/yvYXhGj"
                   target="_blank"

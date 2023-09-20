@@ -81,3 +81,7 @@
 .animate-pulse {
   animation: pulse 0.8s infinite;
 }
+
+.hacktoberfont {
+  font-family: 'JetBrains Mono', monospace;
+}
