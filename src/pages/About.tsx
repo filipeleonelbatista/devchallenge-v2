@@ -53,7 +53,7 @@ export function About() {
             é mais do que apenas uma plataforma de programação. É uma comunidade
             vibrante de apaixonados por desenvolvimento de software, como você!
             Nossa missão é oferecer desafios de programação do mundo real que
-            vão te transformar em um engenheiro de software excepcional.
+            vão te transformar em um desenvolvedor excepcional.
           </p>
         </div>
 
