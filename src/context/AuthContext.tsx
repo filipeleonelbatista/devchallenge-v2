@@ -11,6 +11,8 @@ import { doc, getDoc, setDoc } from "firebase/firestore";
 import { createContext, useEffect, useState } from "react";
 import { DocumentData } from "firebase/firestore";
 
+import secureLocalStorage from "react-secure-storage";
+
 type UserType = {
   email: string;
   password: string;
@@ -106,6 +108,7 @@ export function AuthContextProvider(props: AuthContextProviderProps) {
         setIsLogged(false);
         removeKeyLocalStorage("UID");
         localStorage.clear();
+        secureLocalStorage.clear();
       })
       .catch((error) => {
         alert(`Houve um erro ao tentar sair. Tente novamente mais tarde`);

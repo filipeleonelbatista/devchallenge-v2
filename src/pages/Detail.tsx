@@ -172,13 +172,18 @@ export function Detail() {
         <div className="flex w-full items-center justify-center py-8">
           <div className="flex flex-row p-4 bg-gray-800 rounded w-96 items-center justify-between gap-4">
             <div className="flex flex-row items-center gap-4">
-              <img
-                src={`https://github.com/${challenge?.username}.png`}
-                className="w-16 h-16 rounded-full"
-              />
+              <a href={`https://github.com/${challenge?.username}`}>
+                <img
+                  src={`https://github.com/${challenge?.username}.png`}
+                  className="w-16 h-16 rounded-full"
+                />
+              </a>
               <div>
-                <p className="text-md text-white">{challenge?.username}</p>
-
+                <a href={`https://github.com/${challenge?.username}`}>
+                  <p className="text-md text-white uppercase">
+                    {challenge?.username}
+                  </p>
+                </a>
                 <p className="text-sm text-yellow-400">Desenvolvedor</p>
               </div>
             </div>
@@ -187,9 +192,9 @@ export function Detail() {
                 <FaGithub className="w-7 h-7 mr-2 text-white hover:text-yellow-400" />
               </a>
 
-              <a href={`https://linkedin.com/in/${challenge?.username}`}>
+              {/* <a href={`https://linkedin.com/in/${challenge?.username}`}>
                 <FaLinkedin className="w-7 h-7 mr-2 text-white hover:text-yellow-400" />
-              </a>
+              </a> */}
             </div>
           </div>
         </div>

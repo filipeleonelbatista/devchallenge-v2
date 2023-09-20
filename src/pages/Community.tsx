@@ -44,6 +44,7 @@ interface FormType {
 export function Community() {
   const { addChallenge } = useChallenges();
 
+  const [isLoadingForm, setIsLoadingForm] = useState<boolean>(false);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
 
   const formSchema = useMemo(() => {
@@ -90,6 +91,7 @@ export function Community() {
   });
 
   const handleSubmitForm = async (formValues: FormType) => {
+    setIsLoadingForm(true);
     let uploadURLImage = formValues.background
       ? await uploadImageAsync(formValues.background, "challenges")
       : "";
@@ -110,7 +112,9 @@ export function Community() {
 
     await addChallenge(data);
     formik.resetForm();
+    setImagePreview(null);
     document.getElementById("dialog-close")?.click();
+    setIsLoadingForm(false);
   };
 
   const handleRemoveTech = (index: number) => {
@@ -128,10 +132,7 @@ export function Community() {
             <DialogTitle>Adicionar desafio</DialogTitle>
           </DialogHeader>
           <form
-            onSubmit={(event) => {
-              console.log(formik.errors);
-              formik.handleSubmit(event);
-            }}
+            onSubmit={formik.handleSubmit}
             className="flex flex-col gap-2 my-6"
           >
             <div className="flex flex-col gap-4">
@@ -159,6 +160,7 @@ export function Community() {
               )}
               <input
                 type="file"
+                disabled={isLoadingForm}
                 id="background"
                 accept="image/*"
                 className="sr-only"
@@ -175,6 +177,7 @@ export function Community() {
             <div className="flex flex-col gap-4">
               <Label htmlFor="name">Nome do desafio</Label>
               <Input
+                disabled={isLoadingForm}
                 id="name"
                 placeholder="Desafio ..."
                 type="text"
@@ -193,6 +196,7 @@ export function Community() {
             <div className="flex flex-col gap-4">
               <Label htmlFor="username">Nome de Usuário github</Label>
               <Input
+                disabled={isLoadingForm}
                 id="username"
                 placeholder="Seu username github"
                 type="text"
@@ -211,6 +215,7 @@ export function Community() {
             <div className="flex flex-col gap-4">
               <Label htmlFor="githubRepository">Link do repositório</Label>
               <Input
+                disabled={isLoadingForm}
                 id="githubRepository"
                 placeholder="https://github.com/..."
                 type="text"
@@ -232,6 +237,7 @@ export function Community() {
               <Label htmlFor="type">Tipo</Label>
 
               <Select
+                disabled={isLoadingForm}
                 onValueChange={(event) => formik.setFieldValue("type", event)}
               >
                 <SelectTrigger>
@@ -252,6 +258,7 @@ export function Community() {
               <Label htmlFor="level">Dificuldade</Label>
 
               <Select
+                disabled={isLoadingForm}
                 onValueChange={(event) => formik.setFieldValue("level", event)}
               >
                 <SelectTrigger>
@@ -274,6 +281,7 @@ export function Community() {
               <Label htmlFor="techs">Linguagens</Label>
 
               <Select
+                disabled={isLoadingForm}
                 onValueChange={(event) =>
                   formik.setFieldValue("techs", [...formik.values.techs, event])
                 }
@@ -311,6 +319,7 @@ export function Community() {
                     <div className="flex gap-4 items-center my-2" key={index}>
                       <p>{tech}</p>
                       <Button
+                        disabled={isLoadingForm}
                         onClick={() => handleRemoveTech(index)}
                         className=" w-6 h-6 p-2 bg-red-600 rounded-full hover:bg-red-800"
                       >
@@ -329,6 +338,7 @@ export function Community() {
               <Label htmlFor="description">Descrição</Label>
 
               <Textarea
+                disabled={isLoadingForm}
                 onChange={(event) =>
                   formik.setFieldValue("description", event.target.value)
                 }
@@ -341,7 +351,11 @@ export function Community() {
               )}
             </div>
 
-            <Button type="submit" className="bg-yellow-400 hover:bg-yellow-600">
+            <Button
+              disabled={isLoadingForm}
+              type="submit"
+              className="bg-yellow-400 hover:bg-yellow-600"
+            >
               Adicionar
             </Button>
           </form>

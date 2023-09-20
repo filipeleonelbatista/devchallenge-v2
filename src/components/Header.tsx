@@ -1,9 +1,14 @@
 import { Link } from "react-router-dom";
 import { Logo } from "./Logo";
 import { useLocation } from "react-router-dom";
+import { useAuth } from "@/hooks/useAuth";
+import { Button } from "./ui/button";
+
+import { GoSignOut } from "react-icons/go";
 
 export default function Header() {
   const location = useLocation();
+  const auth = useAuth();
 
   return (
     <div className="flex-col flex">
@@ -21,6 +26,16 @@ export default function Header() {
             >
               Desafios
             </Link>
+            <Button
+              onClick={() => {
+                if (auth && auth.logout) {
+                  auth.logout();
+                }
+              }}
+              className=" w-10 h-10 p-2 bg-yellow-400 rounded-full hover:bg-yellow-600"
+            >
+              <GoSignOut className="w-6 h-6 text-black" />
+            </Button>
           </nav>
           {/* <div className="ml-auto flex items-center space-x-4">
             <Search />

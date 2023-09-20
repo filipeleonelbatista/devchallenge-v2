@@ -143,39 +143,50 @@ export function Challenges() {
             >
               <div className="absolute top-4 left-4 flex flex-col gap-2">
                 <div
+                  title={challenge?.type}
                   className={`px-4 py-0.5 text-sm font-bold ${colorMatch(
                     challenge?.type
-                  )} flex items-center justify-center rounded-full`}
+                  )} flex items-center justify-center rounded-full cursor-pointer`}
                 >
                   {challenge?.type}
                 </div>
                 <div
+                  title={challenge?.level}
                   className={`px-4 py-0.5 text-sm font-bold ${colorMatch(
                     challenge?.level
-                  )} flex items-center justify-center rounded-full`}
+                  )} flex items-center justify-center rounded-full cursor-pointer`}
                 >
                   {challenge?.level}
                 </div>
               </div>
 
               <div className="absolute top-4 right-4 flex flex-col gap-1">
-                {challenge.techs.map((item) => (
+                {challenge.techs.slice(0, 2).map((item) => (
                   <div
                     key={`${item}-${challenge.id}`}
-                    className="px-4 py-0.5 text-sm font-bold bg-gray-700 flex items-center justify-center rounded-full"
+                    title={item}
+                    className="px-4 py-0.5 text-sm font-bold bg-gray-700 flex items-center justify-center rounded-full cursor-pointer"
                   >
                     {item}
                   </div>
                 ))}
+                {challenge.techs.length > 2 && (
+                  <div
+                    title={challenge.techs.slice(2).join(", ")}
+                    className="px-4 py-0.5 text-sm font-bold bg-gray-700 flex items-center justify-center rounded-full cursor-pointer"
+                  >
+                    mais {challenge.techs.length - 2}
+                  </div>
+                )}
               </div>
               <img
                 onClick={() => navigate(`/details/${challenge.id}`)}
-                className="w-full h-44 aspect-video cursor-pointer"
+                className="w-full h-44 aspect-video cursor-pointer object-cover"
                 src={challenge.background}
               />
               <div className="h-full flex flex-col gap-4 px-4 pb-4 items-center justify-between">
                 <h3
-                  className="text-2xl text-white cursor-pointer"
+                  className="text-2xl text-white text-center cursor-pointer"
                   onClick={() => navigate(`/details/${challenge.id}`)}
                 >
                   {challenge.name}
