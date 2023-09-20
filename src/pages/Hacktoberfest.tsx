@@ -165,6 +165,7 @@ export function Hacktoberfest() {
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value={""}>{"Todos"}</SelectItem>
+                  <SelectItem value={"Full Stack"}>{"Full Stack"}</SelectItem>
                   <SelectItem value={"Front-end"}>{"Front-end"}</SelectItem>
                   <SelectItem value={"Back-end"}>{"Back-end"}</SelectItem>
                   <SelectItem value={"Mobile"}>{"Mobile"}</SelectItem>
@@ -190,7 +191,7 @@ export function Hacktoberfest() {
                   <SelectItem value={"HTML"}>{"HTML"}</SelectItem>
                   <SelectItem value={"CSS"}>{"CSS"}</SelectItem>
                   <SelectItem value={"Javascript"}>{"Javascript"}</SelectItem>
-                  <SelectItem value={"Free Choice"}>{"Free Choice"}</SelectItem>
+                  <SelectItem value={"Escollha Livre"}>{"Escollha Livre"}</SelectItem>
                 </SelectContent>
               </Select>
             </div>

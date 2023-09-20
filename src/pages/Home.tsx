@@ -68,6 +68,13 @@ export function Home() {
             <SlScreenSmartphone className="w-12 h-12 text-yellow-400" />
             <p className="font-bold">Mobile</p>
           </Link>
+          <Link
+            to="/challenges?type=Full Stack"
+            className="cursor-pointer w-64 p-16 bg-zinc-900 hover:bg-zinc-700 rounded flex flex-col gap-2 items-center justify-center"
+          >
+            <SlScreenSmartphone className="w-12 h-12 text-yellow-400" />
+            <p className="font-bold">Full Stack</p>
+          </Link>
         </div>
         <div className="py-18 items-center justify-center flex flex-row flex-wrap gap-4">
           <div className="w-64 p-16 flex flex-col gap-2 items-center justify-center">

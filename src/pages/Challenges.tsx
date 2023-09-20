@@ -40,7 +40,8 @@ export function Challenges() {
   useEffect(() => {
     if (location.search.includes("?type=")) {
       const queryTypeParam = location.search.replace("?type=", "");
-      setTypeFilter(queryTypeParam);
+      console.log("queryTypeParam", queryTypeParam);
+      setTypeFilter(queryTypeParam.replace("%20", " "));
     }
   }, [location]);
 
@@ -81,6 +82,7 @@ export function Challenges() {
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value={""}>{"Todos"}</SelectItem>
+                  <SelectItem value={"Full Stack"}>{"Full Stack"}</SelectItem>
                   <SelectItem value={"Front-end"}>{"Front-end"}</SelectItem>
                   <SelectItem value={"Back-end"}>{"Back-end"}</SelectItem>
                   <SelectItem value={"Mobile"}>{"Mobile"}</SelectItem>
@@ -106,7 +108,9 @@ export function Challenges() {
                   <SelectItem value={"HTML"}>{"HTML"}</SelectItem>
                   <SelectItem value={"CSS"}>{"CSS"}</SelectItem>
                   <SelectItem value={"Javascript"}>{"Javascript"}</SelectItem>
-                  <SelectItem value={"Free Choice"}>{"Free Choice"}</SelectItem>
+                  <SelectItem value={"Escolha Livre"}>
+                    {"Escolha Livre"}
+                  </SelectItem>
                 </SelectContent>
               </Select>
             </div>

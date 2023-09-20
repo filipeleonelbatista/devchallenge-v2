@@ -244,6 +244,7 @@ export function Community() {
                   <SelectValue placeholder="Tipo" />
                 </SelectTrigger>
                 <SelectContent>
+                  <SelectItem value={"Full Stack"}>{"Full Stack"}</SelectItem>
                   <SelectItem value={"Front-end"}>{"Front-end"}</SelectItem>
                   <SelectItem value={"Back-end"}>{"Back-end"}</SelectItem>
                   <SelectItem value={"Mobile"}>{"Mobile"}</SelectItem>
