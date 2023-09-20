@@ -1,0 +1,263 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family: "Roboto";
+}
+
+header {
+    padding: 1rem 2rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+header h1 {
+    display: flex;
+    color: #D6000D;
+    font-size: 3rem;
+}
+
+header h1 p {
+    color: black;
+}
+
+header nav {
+    font-size: 1.5rem;
+}
+
+header nav a {
+    margin-right: 3rem;
+    color: black;
+}
+
+header nav button {
+    padding: .5rem 4rem;
+
+    border: none;
+    border-radius: 10px;
+
+    background: #D6000D;
+    color: white;
+
+    font-size: 1.5rem;
+}
+
+main {
+    margin-top: 5rem;
+}
+
+main .inicio {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+main .inicio img{
+    width: 600px;
+    margin-right: 2rem;
+}
+
+main .inicio section{
+    margin-top: -50px;
+}
+
+main .inicio section p {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: black;
+}
+
+main .inicio section h1 {
+    font-size: 5rem;
+    color: #D6000D;
+    margin: 1rem 0 3rem 0;
+}
+
+main .inicio section button {
+    background: #D6000D;
+
+    color: white;
+
+    padding: 1rem 4rem;
+    border: none;
+    border-radius: 20px;
+
+    font-size: 1.5rem;
+}
+
+main #servicos {
+    margin-top: 10rem;
+
+    display: flex;
+    flex-direction: column;
+}
+
+main #servicos article {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+main #servicos article ul {
+    list-style: none;
+
+    font-size: 2rem;
+    margin-right: 150px;
+}
+
+main #servicos article ul li {
+    margin-bottom: .5rem;
+}
+
+main #servicos article ul img{
+    width: 30px;
+    
+}
+
+main #servicos article img {
+    width: 600px;
+}
+
+main #servicos section {
+    margin: 3em 0 0 9rem;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+main #servicos section strong{
+    font-size: 1.5rem;
+
+    padding: 0  0 1rem 0;
+}
+
+main #servicos section input, main #servicos section button{
+    width: 15rem;
+    height: 3rem;
+
+    padding: 10px;
+
+    font-size: 1rem;
+    font-weight: 500;
+
+    background: #d3d3d3;
+    color: white;
+
+    border: none;
+    border-radius: 8px;
+}
+
+main #servicos section input{
+    background: #d3d3d3;
+    color: white;
+
+    margin-right: 1rem;
+}
+
+main #servicos section button{
+    background: #D6000D;
+    color: white;
+}
+
+main #contato {
+    margin-top: 10rem;
+    margin-bottom: 5rem;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+main #contato .card{
+    display: grid;
+    grid-template-columns: 6fr auto;
+
+    width: 550px;
+    height: 200px;
+    padding: 2rem;
+    background: #d3d3d3;
+    border-radius: 10px;
+}
+main #contato .card:first-child{
+    margin: 0 5rem 0 10rem;
+}
+
+main #contato .card:last-child{
+    margin: 0 10rem 0 0;
+}
+main #contato .card img{
+    grid-row-start: 1;
+    grid-row-end: 5;
+
+    width: 70px;
+    margin-right: 2rem;
+}
+
+main #contato .card p{
+    width: 90%;
+    font-size: 1rem;
+    font-weight: 500;
+
+    margin-bottom: 1rem;
+}
+
+main #contato .card h2{
+    font-weight: 500;
+
+    margin-bottom: .1rem;
+}
+
+main footer {
+    padding: 5rem;
+    background: black;
+    color: white;
+
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+}
+
+main footer .footerLogo em{
+    font-size: 3rem;
+    font-weight: 500;
+}
+
+main footer .footerLogo p{
+    margin-top: 1rem;
+    font-size: 1rem;
+    font-weight: 300;
+}
+main footer .footerAbout{
+    width: 20%
+}
+
+main footer .footerAbout h2{
+    margin: 1rem 0 1rem 0;
+}
+
+main footer .footerContact h2{
+    margin: 1rem 0 1rem 0;
+}
+
+main footer .footerContact address p{
+    margin: 0 0 1rem 0;
+}
+
+main footer .footerContact address a{
+    color: white;
+    text-decoration: underline;
+}
+main footer .footerMedia h2 {
+    margin: 1rem 0 1rem 0;
+}
+
+main footer .footerMedia img {
+    width: 30px;
+    margin-left: 20px;
+}
