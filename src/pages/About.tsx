@@ -42,11 +42,20 @@ export function About() {
             Um pouco sobre nós
           </p>
           <p className="text-white max-w-2xl mt-10 text-center">
-            O DevChallenge é mais do que apenas uma plataforma de programação. É
-            uma comunidade vibrante de apaixonados por desenvolvimento de
-            software, como você! Nossa missão é oferecer desafios de programação
-            do mundo real que vão te transformar em um engenheiro de software
-            excepcional.
+            O{" "}
+            <a
+              href="https://discord.gg/yvYXhGj"
+              target="_blank"
+              rel="nofollow noreferer noopener"
+            >
+              <b>
+                <span className="text-yellow-400">Dev</span>Challenge
+              </b>
+            </a>{" "}
+            é mais do que apenas uma plataforma de programação. É uma comunidade
+            vibrante de apaixonados por desenvolvimento de software, como você!
+            Nossa missão é oferecer desafios de programação do mundo real que
+            vão te transformar em um engenheiro de software excepcional.
           </p>
         </div>
 
@@ -73,7 +82,7 @@ export function About() {
               <FaDiscord className="w-12 h-12 text-yellow-400" />
               <p className="font-bold text-center">Comunidade Engajada</p>
               <p className="text-white text-center">
-                unte-se a uma comunidade de desenvolvedores apaixonados que
+                Junte-se a uma comunidade de desenvolvedores apaixonados que
                 compartilham recursos, práticas e desafios. Aprenda uns com os
                 outros e cresça como desenvolvedor.
               </p>

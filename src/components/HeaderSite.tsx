@@ -58,7 +58,7 @@ export default function HeaderSite() {
                   to="/hacktoberfest"
                   className={`text-sm font-medium ${
                     location.pathname === "/hacktoberfest"
-                      ? "bg-yellow-600"
+                      ? "bg-yellow-400"
                       : "bg-yellow-400"
                   } transition-colors hover:bg-yellow-600 animate-pulse text-black px-6 py-2 rounded-full`}
                 >

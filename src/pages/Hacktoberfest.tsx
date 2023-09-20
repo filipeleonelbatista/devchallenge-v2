@@ -20,6 +20,10 @@ import { FaDiscord } from "react-icons/fa";
 import { Player } from "@lottiefiles/react-lottie-player";
 import { Input } from "@/components/ui/input";
 
+import { AiOutlineCode } from "react-icons/ai";
+import { IoShirtOutline } from "react-icons/io5";
+import { SlScreenDesktop } from "react-icons/sl";
+
 export function Hacktoberfest() {
   const navigate = useNavigate();
 
@@ -92,12 +96,44 @@ export function Hacktoberfest() {
     <>
       <HeaderSite />
       <div className="container mx-auto p-4 flex flex-col">
-        <img
-          className="w-full aspect-[16/4.5] object-cover rounded"
-          src={HacktoberfestBanner}
-        />
+        <div className="py-16 items-center justify-center flex flex-col gap-4">
+          <div className="flex flex-col items-center justify-center">
+            <h2 className="text-3xl text-center font-bold leading-relaxed typewriter">
+              Junte-se ao Hacktoberfest e{" "}
+            </h2>
+            <h2 className="text-3xl text-center font-bold leading-relaxed typewriter">
+              Fortaleça Sua Jornada no{" "}
+              <a
+                href="https://discord.gg/yvYXhGj"
+                target="_blank"
+                rel="nofollow noreferer noopener"
+              >
+                <b>
+                  <span className="text-yellow-400">Dev</span>Challenge
+                </b>
+              </a>
+              !
+            </h2>
+          </div>
+          <p className="text-white max-w-2xl mt-10 text-center">
+            O Hacktoberfest está chegando, e o{" "}
+            <a
+              href="https://discord.gg/yvYXhGj"
+              target="_blank"
+              rel="nofollow noreferer noopener"
+            >
+              <b>
+                <span className="text-yellow-400">Dev</span>Challenge
+              </b>
+            </a>{" "}
+            está pronto para receber você nessa festa global de desenvolvimento
+            de software! Este evento é uma oportunidade emocionante para
+            mergulhar de cabeça no mundo do código aberto, contribuir para
+            projetos incríveis e crescer como desenvolvedor.
+          </p>
+        </div>
         <div className="flex items-end p-4">
-          <p className="text-3xl font-bold">Desafios</p>
+          <p className="text-3xl font-bold">Desafios Hacktoberfest</p>
           <div className="flex gap-4 ml-auto">
             <div className="space-y-2 w-32">
               <Label htmlFor="category">Categorias</Label>
@@ -229,6 +265,148 @@ export function Hacktoberfest() {
         </main>
 
         <Separator />
+
+        <div className="flex flex-row py-28 items-center justify-center gap-8">
+          <div className="flex flex-col gap-2 max-w-xs space-y-2">
+            <p className="text-4xl text-yellow-400 font-bold">
+              O que é o Hacktoberfest!
+            </p>
+            <p className="text-white">
+              O Hacktoberfest é um mês inteiro dedicado à celebração da
+              comunidade de código aberto. Durante outubro, desenvolvedores de
+              todo o mundo se reúnem para contribuir com projetos de código
+              aberto. A melhor parte? Você pode ganhar prêmios incríveis
+              simplesmente participando e contribuindo!
+            </p>
+            <a
+              href="https://discord.gg/yvYXhGj"
+              target="_blank"
+              rel="nofollow noreferer noopener"
+              className={`flex flex-row items-center justify-center text-sm font-medium bg-yellow-400 transition-colors hover:bg-yellow-600 animate-pulse text-black px-6 py-2 rounded-full`}
+            >
+              <FaDiscord className="w-4 h-4 text-black mr-2" />
+              Entre na comunidade
+            </a>
+          </div>
+          <Player
+            autoplay={true}
+            controls={false}
+            loop={true}
+            src={DiscordAnimation}
+            style={{ height: "300px", width: "300px" }}
+          />
+        </div>
+
+        <div className="flex py-8 w-full flex-col items-center justify-center gap-2">
+          <h3 className="text-2xl font-bold text-yellow-400 max-w-3xl">
+            🤔 Por que escolher o DevChallenge para o Hacktoberfest?
+          </h3>
+          <p className="text-white max-w-2xl text-center">
+            Quando você se junta ao Hacktoberfest por meio do{" "}
+            <a
+              href="https://discord.gg/yvYXhGj"
+              target="_blank"
+              rel="nofollow noreferer noopener"
+            >
+              <b>
+                <span className="text-yellow-400">Dev</span>Challenge
+              </b>
+            </a>
+            , está entrando em uma comunidade apaixonada por desenvolvimento de
+            software. Nossa plataforma oferece desafios de programação do mundo
+            real, projetos bem documentados e uma comunidade de desenvolvedores
+            engajados. Aqui está o que você ganha ao escolher o DevChallenge:
+          </p>
+        </div>
+        <div className="py-16 w-full items-center justify-center flex">
+          <div className="max-w-6xl items-center justify-center grid xs:grid-rows-4 md:grid-cols-4 gap-4">
+            <div className="cursor-pointer w-full md:h-[310px] p-4 bg-zinc-900 hover:bg-zinc-700 rounded flex flex-col gap-2 items-center justify-start">
+              <SlScreenDesktop className="w-12 h-12 text-yellow-400" />
+              <p className="font-bold text-center">Projetos de Qualidade</p>
+              <p className="text-white text-center">
+                Contribua para projetos reais e impactantes que farão a
+                diferença no mundo.
+              </p>
+            </div>
+            <div className="cursor-pointer w-full md:h-[310px] p-4 bg-zinc-900 hover:bg-zinc-700 rounded flex flex-col gap-2 items-center justify-start">
+              <FaDiscord className="w-12 h-12 text-yellow-400" />
+              <p className="font-bold text-center">Comunidade Engajada</p>
+              <p className="text-white text-center">
+                Conecte-se com outros desenvolvedores dedicados que compartilham
+                seu entusiasmo pelo código aberto.
+              </p>
+            </div>
+            <div className="cursor-pointer w-full md:h-[310px] p-4 bg-zinc-900 hover:bg-zinc-700 rounded flex flex-col gap-2 items-center justify-start">
+              <AiOutlineCode className="w-12 h-12 text-yellow-400" />
+              <p className="font-bold text-center">Aprimore Suas Habilidades</p>
+              <p className="text-white text-center">
+                Desenvolva suas habilidades de programação enquanto contribui
+                para projetos de código aberto.
+              </p>
+            </div>
+            <div className="cursor-pointer w-full md:h-[310px] p-4 bg-zinc-900 hover:bg-zinc-700 rounded flex flex-col gap-2 items-center justify-start">
+              <IoShirtOutline className="w-12 h-12 text-yellow-400" />
+              <p className="font-bold text-center">Prêmios e Reconhecimento</p>
+              <p className="text-white text-center">
+                Além das recompensas do Hacktoberfest, o DevChallenge oferece
+                reconhecimento especial para os membros mais ativos.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div className="flex flex-row items-center justify-center gap-8">
+          <div className="flex flex-row w-full max-w-4xl md:flex-column gap-4 py-8">
+            <div className="flex flex-1 flex-col gap-2">
+              <h4 className="text-2xl text-purple-600 font-bold">
+                Como Participar?
+              </h4>
+
+              <ol className="list-decimal ml-4 space-y-2 marker:text-yellow-400 marker:font-bold">
+                <li className="pl-2">Registre-se no Hacktoberfest.</li>
+                <li className="pl-2">
+                  Escolha desafios do{" "}
+                  <a
+                    href="https://discord.gg/yvYXhGj"
+                    target="_blank"
+                    rel="nofollow noreferer noopener"
+                  >
+                    <b>
+                      <span className="text-yellow-400">Dev</span>Challenge
+                    </b>
+                  </a>{" "}
+                  participantes que você deseja contribuir.
+                </li>
+                <li className="pl-2">
+                  Faça suas contribuições e abra pull requests nos projetos do
+                  DevChallenge.
+                </li>
+                <li className="pl-2">
+                  Celebre suas contribuições e acompanhe seu progresso.
+                </li>
+              </ol>
+            </div>
+            <div className="flex flex-1 flex-col gap-2">
+              <h4 className="text-2xl text-purple-600 font-bold">Bora?!</h4>
+
+              <p className="text-white">
+                Junte-se ao Hacktoberfest através do{" "}
+                <a
+                  href="https://discord.gg/yvYXhGj"
+                  target="_blank"
+                  rel="nofollow noreferer noopener"
+                >
+                  <b>
+                    <span className="text-yellow-400">Dev</span>Challenge
+                  </b>
+                </a>{" "}
+                e faça parte de uma comunidade que valoriza seu crescimento como
+                desenvolvedor. Vamos celebrar o código aberto juntos e tornar
+                outubro um mês incrível para todos nós!
+              </p>
+            </div>
+          </div>
+        </div>
 
         <div className="flex flex-row items-center justify-center gap-8">
           <div className="flex flex-col gap-2 max-w-xs space-y-2">
