@@ -152,7 +152,10 @@ export function Hacktoberfest() {
           </p>
         </div>
         <div className="flex items-end p-4">
-          <p className="text-3xl font-bold">Desafios Hacktoberfest</p>
+          <div>
+            <p className="text-3xl font-bold">Desafios Hacktoberfest</p>
+            <p className="text-sm">{filteredChallenges.length} desafios</p>
+          </div>
           <div className="flex gap-4 ml-auto">
             <div className="space-y-2 w-32">
               <Label htmlFor="category">Categorias</Label>
@@ -191,7 +194,9 @@ export function Hacktoberfest() {
                   <SelectItem value={"HTML"}>{"HTML"}</SelectItem>
                   <SelectItem value={"CSS"}>{"CSS"}</SelectItem>
                   <SelectItem value={"Javascript"}>{"Javascript"}</SelectItem>
-                  <SelectItem value={"Escollha Livre"}>{"Escollha Livre"}</SelectItem>
+                  <SelectItem value={"Escollha Livre"}>
+                    {"Escollha Livre"}
+                  </SelectItem>
                 </SelectContent>
               </Select>
             </div>
