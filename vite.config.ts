@@ -18,7 +18,7 @@ export default defineConfig({
         short_name: "DevChallenge",
         description:
           "O DevChallenge é mais do que apenas uma plataforma de programação. É uma comunidade de apaixonados por desenvolvimento de software!",
-        theme_color: "#000000",
+        theme_color: "#facc15",
         icons: [
           {
             src: "logo.png",
