@@ -33,10 +33,10 @@ export function About() {
       <HeaderSite />
       <div className="container mx-auto p-4 flex flex-col">
         <div className="py-16 items-center justify-center flex flex-col gap-4">
-          <h2 className="text-5xl font-bold leading-relaxed typewriter">
+          <h2 className="text-2xl md:text-5xl text-center font-bold typewriter">
             Sobre o <span className="text-yellow-400">Dev</span>Challenge
           </h2>
-          <p className="text-lg text-yellow-400 font-bold">
+          <p className="text-lg text-center text-yellow-400 font-bold">
             Um pouco sobre nós
           </p>
           <p className="text-white max-w-2xl mt-10 text-center">
@@ -108,7 +108,7 @@ export function About() {
           </div>
         </div>
 
-        <div className="flex flex-row items-center justify-center gap-8">
+        <div className="flex flex-col md:flex-row items-center justify-center gap-8">
           <Player
             autoplay={true}
             controls={false}
@@ -146,7 +146,7 @@ export function About() {
           </div>
         </div>
 
-        <div className="flex py-16 flex-row items-center justify-center gap-8">
+        <div className="flex py-16 flex-col md:flex-row items-center justify-center gap-8">
           <div className="flex flex-col gap-4 max-w-md">
             <h3 className="text-4xl font-bold text-yellow-400">Nossa equipe</h3>
             <p className="text-white">
@@ -182,7 +182,7 @@ export function About() {
             </a>
           </div>
         </div>
-        <div className="flex flex-row items-center justify-center gap-8">
+        <div className="flex flex-col md:flex-row items-center justify-center gap-8">
           <Player
             autoplay={true}
             controls={false}

@@ -33,10 +33,10 @@ export function Home() {
       <HeaderSite />
       <div className="container mx-auto p-4 flex flex-col">
         <div className="py-28 items-center justify-center flex flex-col gap-4">
-          <h2 className="text-5xl font-bold typewriter">
+          <h2 className="text-2xl md:text-5xl text-center font-bold typewriter">
             Melhore suas habilidades
           </h2>
-          <p className="text-lg text-yellow-400 font-bold">
+          <p className="text-lg text-center text-yellow-400 font-bold">
             Com desafios de front-end, back-end e mobile
           </p>
           <Button
@@ -91,7 +91,7 @@ export function Home() {
             <p className="font-bold text-yellow-400">Compartilhe</p>
           </div>
         </div>
-        <div className="flex flex-row items-center justify-center gap-8">
+        <div className="flex flex-col md:flex-row items-center justify-center gap-8">
           <Player
             autoplay={true}
             controls={false}

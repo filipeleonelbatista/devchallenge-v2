@@ -68,12 +68,12 @@ export function Challenges() {
     <>
       <HeaderSite />
       <div className="container mx-auto p-4 flex flex-col">
-        <div className="flex items-end p-4">
-          <div>
+        <div className="flex flex-col md:flex-row items-center md:items-end p-4 gap-4">
+          <div className="flex flex-col items-center md:items-start">
             <p className="text-3xl font-bold">Desafios</p>
             <p className="text-sm">{filteredChallenges.length} desafios</p>
           </div>
-          <div className="flex gap-4 ml-auto">
+          <div className="flex gap-4 md:ml-auto">
             <div className="space-y-2 w-32">
               <Label htmlFor="category">Categorias</Label>
               <Select

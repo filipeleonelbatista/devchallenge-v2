@@ -99,7 +99,7 @@ export function Hacktoberfest() {
       <div className="container mx-auto p-4 flex flex-col">
         <div className="py-16 items-center justify-center flex flex-col gap-4">
           <div className="flex flex-col items-center justify-center">
-            <h2 className="text-3xl text-center font-bold leading-relaxed typewriter">
+            <h2 className="text-xl md:text-3xl text-center font-bold leading-relaxed typewriter">
               Junte-se ao{" "}
               <a
                 href="https://hacktoberfest.com/"
@@ -111,7 +111,7 @@ export function Hacktoberfest() {
               </a>{" "}
               e{" "}
             </h2>
-            <h2 className="text-3xl text-center font-bold leading-relaxed typewriter">
+            <h2 className="text-md md:text-3xl text-center font-bold leading-relaxed typewriter">
               Fortaleça Sua Jornada no{" "}
               <a
                 href="https://discord.gg/yvYXhGj"
@@ -151,12 +151,12 @@ export function Hacktoberfest() {
             projetos incríveis e crescer como desenvolvedor.
           </p>
         </div>
-        <div className="flex items-end p-4">
-          <div>
+        <div className="flex flex-col md:flex-row items-center md:items-end p-4 gap-4">
+          <div className="flex flex-col items-center md:items-start">
             <p className="text-3xl font-bold">Desafios Hacktoberfest</p>
             <p className="text-sm">{filteredChallenges.length} desafios</p>
           </div>
-          <div className="flex gap-4 ml-auto">
+          <div className="flex gap-4 md:ml-auto">
             <div className="space-y-2 w-32">
               <Label htmlFor="category">Categorias</Label>
               <Select
@@ -291,7 +291,7 @@ export function Hacktoberfest() {
 
         <Separator />
 
-        <div className="flex flex-row py-28 items-center justify-center gap-8">
+        <div className="flex flex-col md:flex-row py-28 items-center justify-center gap-8">
           <div className="flex flex-col gap-2 max-w-xs space-y-2">
             <p className="text-4xl text-yellow-400 font-bold">
               O que é o
@@ -345,13 +345,13 @@ export function Hacktoberfest() {
             <img
               src={HacktoberfestLogo}
               alt="HACKTOBERFEST LOGO"
-              className="w-82 h-96"
+              className="w-82 h-full md:h-96"
             />
           </a>
         </div>
 
         <div className="flex py-8 w-full flex-col items-center justify-center gap-2">
-          <h3 className="text-2xl font-bold text-yellow-400 max-w-3xl">
+          <h3 className="text-2xl text-center font-bold text-yellow-400 max-w-3xl">
             🤔 Por que escolher o DevChallenge para o
             <a
               href="https://hacktoberfest.com/"
@@ -459,7 +459,7 @@ export function Hacktoberfest() {
         </div>
 
         <div className="flex flex-row items-center justify-center gap-8">
-          <div className="flex flex-row w-full max-w-4xl md:flex-column gap-4 py-8">
+          <div className="flex flex-col md:flex-row w-full max-w-4xl md:flex-column gap-4 py-8">
             <div className="flex flex-1 flex-col gap-2">
               <h4 className="text-2xl text-purple-600 font-bold">
                 Como Participar?
@@ -521,7 +521,7 @@ export function Hacktoberfest() {
           </div>
         </div>
 
-        <div className="flex flex-row items-center justify-center gap-8">
+        <div className="flex flex-col md:flex-row items-center justify-center gap-8">
           <div className="flex flex-col gap-2 max-w-xs space-y-2">
             <p className="text-4xl font-bold">Entre agora na comunidade!</p>
             <p className="text-yellow-400">
@@ -546,7 +546,7 @@ export function Hacktoberfest() {
             style={{ height: "300px", width: "300px" }}
           />
         </div>
-        <div className="flex flex-row items-center justify-center gap-8">
+        <div className="flex flex-col md:flex-row items-center justify-center gap-8">
           <Player
             autoplay={true}
             controls={false}
