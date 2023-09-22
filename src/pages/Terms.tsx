@@ -19,21 +19,8 @@ export function Terms() {
         </div>
         <Separator />
         <main className="w-full flex">
-          <div
-            style={{
-              width: "100%",
-              display: "flex",
-              alignIgems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <div
-              style={{
-                maxWidth: "720px",
-                width: "100%",
-                padding: "1.4rem",
-              }}
-            >
+          <div className="w-full flex items-center justify-center">
+            <div className="flex flex-col w-4/5 flex p-4">
               <h2 className="text-2xl font-bold my-4">1. Termos</h2>
               <p>
                 Ao acessar ao site{" "}

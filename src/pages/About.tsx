@@ -3,8 +3,6 @@ import AcceptTerms from "@/components/AcceptTerms";
 import FooterSite from "@/components/FooterSite";
 import HeaderSite from "@/components/HeaderSite";
 import NewsLetter from "@/components/NewsLetter";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Player } from "@lottiefiles/react-lottie-player";
 import { AiOutlineCode } from "react-icons/ai";
 import { BsFolderCheck } from "react-icons/bs";

@@ -19,24 +19,9 @@ export function Privacy() {
         </div>
         <Separator />
         <main className="w-full flex gap-4 flex-wrap py-4 justify-center">
-          <div
-            style={{
-              width: "100%",
-              display: "flex",
-              alignIgems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <div
-              style={{
-                maxWidth: "720px",
-                width: "100%",
-                padding: "1.4rem",
-              }}
-            >
-              <h2 style={{ fontSize: 32, marginBottom: 24 }}>
-                Política Privacidade
-              </h2>
+          <div className="w-full flex items-center justify-center">
+            <div className="flex flex-col w-4/5 flex p-4">
+              <h2 className="text-2xl font-bold my-4">Política Privacidade</h2>
               <p>
                 A sua privacidade é importante para nós. É política do
                 DevChallenge respeitar a sua privacidade em relação a qualquer
