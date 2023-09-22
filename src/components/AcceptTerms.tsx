@@ -24,7 +24,7 @@ export default function AcceptTerms() {
   if (!isShow) return null;
 
   return (
-    <div className="fixed top-0 z-100 w-screen h-screen backdrop-blur-sm bg-black/30 flex items-end justify-center p-4">
+    <div className="fixed top-0 z-100 w-screen h-screen backdrop-blur-sm bg-black/30 flex items-end justify-center p-4 pb-20 md:pb-4">
       <div className="flex flex-col gap-2 w-full md:w-3/5 rounded p-4 z-10 bg-zinc-950/90 border border-inherit shadow">
         <p className="leading-relaxed font-bold">Seu Próximo Passo!</p>
         <div className="flex flex-col md:flex-row gap-2 md:gap-4 items-center">
