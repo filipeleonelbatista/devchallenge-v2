@@ -5,9 +5,9 @@ import { Input } from "@/components/ui/input";
 import { addEmailIntoNewsletter } from "@/utils/NewsLetterFunctions";
 import { Player } from "@lottiefiles/react-lottie-player";
 import { useState } from "react";
+import { BsStack } from "react-icons/bs";
 import { IoCodeSlash, IoSearch, IoShareSocialOutline } from "react-icons/io5";
 import { SlScreenDesktop, SlScreenSmartphone } from "react-icons/sl";
-import { BsStack } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom";
 
 export function Home() {
