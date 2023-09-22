@@ -85,3 +85,41 @@
 .hacktoberfont {
   font-family: 'JetBrains Mono', monospace;
 }
+
+/* scrollbar  */
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #A1A1AA #09090B;
+}
+
+/* Chrome, Edge and Safari */
+*::-webkit-scrollbar {
+  height: 10px;
+  width: 10px;
+}
+*::-webkit-scrollbar-track {
+  border-radius: 5px;
+  background-color: #09090B;
+}
+
+*::-webkit-scrollbar-track:hover {
+  background-color: #18181B;
+}
+
+*::-webkit-scrollbar-track:active {
+  background-color: #27272A;
+}
+
+*::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: #A1A1AA;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: #D4D4D8;
+}
+
+*::-webkit-scrollbar-thumb:active {
+  background-color: #E4E4E7;
+}
