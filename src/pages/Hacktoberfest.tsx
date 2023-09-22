@@ -23,6 +23,7 @@ import NewsLetter from "@/components/NewsLetter";
 import { AiOutlineCode } from "react-icons/ai";
 import { IoShirtOutline } from "react-icons/io5";
 import { SlScreenDesktop } from "react-icons/sl";
+import AcceptTerms from "@/components/AcceptTerms";
 
 export function Hacktoberfest() {
   const navigate = useNavigate();
@@ -532,6 +533,7 @@ export function Hacktoberfest() {
         <NewsLetter />
       </div>
       <FooterSite />
+      <AcceptTerms />
     </>
   );
 }

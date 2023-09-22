@@ -29,6 +29,7 @@ import * as Yup from "yup";
 
 import { GoVideo } from "react-icons/go";
 import { v4 } from "uuid";
+import AcceptTerms from "@/components/AcceptTerms";
 
 interface FormType {
   name: string;
@@ -392,6 +393,7 @@ export function Community() {
         </div>
         <FooterSite />
       </Dialog>
+      <AcceptTerms />
     </>
   );
 }

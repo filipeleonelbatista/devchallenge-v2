@@ -15,6 +15,8 @@ import { Community } from "./pages/Community";
 import { Detail } from "./pages/Detail";
 import { Hacktoberfest } from "./pages/Hacktoberfest";
 import { Home } from "./pages/Home";
+import { Privacy } from "./pages/Privacy";
+import { Terms } from "./pages/Terms";
 
 const ProtectedRoute = ({ element }: { element: ReactNode }) => {
   const auth = useAuth();
@@ -35,6 +37,8 @@ export function Routes() {
         <Route path="/details/:id" element={<Detail />} />
         <Route path="/devs" element={<Community />} />
         <Route path="/admin" element={<Login />} />
+        <Route path="/terms-and-conditions" element={<Terms />} />
+        <Route path="/privacy-policies" element={<Privacy />} />
         <Route path="/admin/registration" element={<Registration />} />
         <Route
           path="/admin/inicio"

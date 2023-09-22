@@ -1,3 +1,4 @@
+import AcceptTerms from "@/components/AcceptTerms";
 import FooterSite from "@/components/FooterSite";
 import HeaderSite from "@/components/HeaderSite";
 import { Button } from "@/components/ui/button";
@@ -196,6 +197,7 @@ export function Detail() {
         </div>
       </div>
       <FooterSite />
+      <AcceptTerms />
     </>
   );
 }

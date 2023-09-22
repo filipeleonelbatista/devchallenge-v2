@@ -1,4 +1,5 @@
 import DevAnimation from "@/assets/animations/dev.json";
+import AcceptTerms from "@/components/AcceptTerms";
 import FooterSite from "@/components/FooterSite";
 import HeaderSite from "@/components/HeaderSite";
 import NewsLetter from "@/components/NewsLetter";
@@ -169,6 +170,7 @@ export function About() {
         <NewsLetter />
       </div>
       <FooterSite />
+      <AcceptTerms />
     </>
   );
 }
