@@ -1,38 +1,21 @@
 import DevAnimation from "@/assets/animations/dev.json";
 import FooterSite from "@/components/FooterSite";
 import HeaderSite from "@/components/HeaderSite";
+import NewsLetter from "@/components/NewsLetter";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { addEmailIntoNewsletter } from "@/utils/NewsLetterFunctions";
 import { Player } from "@lottiefiles/react-lottie-player";
-import { useState } from "react";
 import { AiOutlineCode } from "react-icons/ai";
 import { BsFolderCheck } from "react-icons/bs";
 import { FaDiscord } from "react-icons/fa";
 import { SlScreenDesktop } from "react-icons/sl";
 
 export function About() {
-  const [email, setEmail] = useState("");
-
-  async function handleSubscribe(e: any) {
-    e.preventDefault();
-
-    try {
-      const response = await addEmailIntoNewsletter(email);
-      if (response) {
-        alert("Feito! Você será o primeiro a saber sobre novos desafios :)");
-        setEmail("");
-      }
-    } catch (err) {
-      alert("Opa, algo deu errado! Pode tentar novamente? :c");
-    }
-  }
-
   return (
     <>
       <HeaderSite />
-      <div className="container mx-auto p-4 flex flex-col">
-        <div className="py-16 items-center justify-center flex flex-col gap-4">
+      <div className="container p-4 flex flex-col">
+        <div className=" py-16 items-center justify-center flex flex-col gap-4">
           <h2 className="text-2xl md:text-5xl text-center font-bold typewriter">
             Sobre o <span className="text-yellow-400">Dev</span>Challenge
           </h2>
@@ -182,36 +165,8 @@ export function About() {
             </a>
           </div>
         </div>
-        <div className="flex flex-col md:flex-row items-center justify-center gap-8">
-          <Player
-            autoplay={true}
-            controls={false}
-            loop={true}
-            src="https://assets5.lottiefiles.com/private_files/lf30_WdTEui.json"
-            style={{ height: "300px", width: "300px" }}
-          />
-          <div className="flex flex-col gap-2">
-            <p className="text-2xl font-bold">
-              Seja notificado sobre novos desafios!
-            </p>
-            <p className="text-yellow-400">
-              Inscreva-se para ser o primeiro a saber sobre novos desafios 😀
-            </p>
-            <Input
-              value={email}
-              onChange={(event) => setEmail(event.target.value)}
-              type="email"
-              placeholder="Digite seu melhor email..."
-            />
-            <Button
-              onClick={handleSubscribe}
-              type="button"
-              className="bg-purple-800 text-white hover:bg-purple-500 rounded-full"
-            >
-              Inscrever
-            </Button>
-          </div>
-        </div>
+
+        <NewsLetter />
       </div>
       <FooterSite />
     </>

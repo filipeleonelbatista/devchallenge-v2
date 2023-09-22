@@ -363,8 +363,8 @@ export function Community() {
         </DialogContent>
 
         <HeaderSite />
-        <div className="container mx-auto p-4 flex flex-col">
-          <div className="py-24 items-center justify-center flex flex-row flex-wrap gap-4">
+        <div className="container p-4 flex flex-col">
+          <div className="w-full py-24 items-center justify-center flex flex-row flex-wrap gap-4">
             <DialogTrigger className="cursor-pointer w-64 p-16 bg-zinc-900 hover:bg-zinc-700 rounded flex flex-col gap-2 items-center justify-center">
               <GoLightBulb className="w-12 h-12 text-yellow-400" />
               <p className="text-center font-bold">Enviar novo desafio</p>

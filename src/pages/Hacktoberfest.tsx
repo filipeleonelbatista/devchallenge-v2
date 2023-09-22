@@ -1,6 +1,6 @@
+import DiscordAnimation from "@/assets/animations/discord.json";
 import HacktoberfestLogo from "@/assets/hacktoberfest/hacktoberfest-logo.png";
 import HacktoberfestIcon from "@/assets/hacktoberfest/icon.png";
-import DiscordAnimation from "@/assets/animations/discord.json";
 import FooterSite from "@/components/FooterSite";
 import HeaderSite from "@/components/HeaderSite";
 import { Button } from "@/components/ui/button";
@@ -14,35 +14,18 @@ import {
 } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
 import { useChallenges } from "@/hooks/useChallenges";
-import { addEmailIntoNewsletter } from "@/utils/NewsLetterFunctions";
-import { useEffect, useMemo, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { FaDiscord } from "react-icons/fa";
 import { Player } from "@lottiefiles/react-lottie-player";
-import { Input } from "@/components/ui/input";
+import { useEffect, useMemo, useState } from "react";
+import { FaDiscord } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
+import NewsLetter from "@/components/NewsLetter";
 import { AiOutlineCode } from "react-icons/ai";
 import { IoShirtOutline } from "react-icons/io5";
 import { SlScreenDesktop } from "react-icons/sl";
 
 export function Hacktoberfest() {
   const navigate = useNavigate();
-
-  const [email, setEmail] = useState("");
-
-  async function handleSubscribe(e: any) {
-    e.preventDefault();
-
-    try {
-      const response = await addEmailIntoNewsletter(email);
-      if (response) {
-        alert("Feito! Você será o primeiro a saber sobre novos desafios :)");
-        setEmail("");
-      }
-    } catch (err) {
-      alert("Opa, algo deu errado! Pode tentar novamente? :c");
-    }
-  }
 
   const { challengesList } = useChallenges();
 
@@ -96,8 +79,8 @@ export function Hacktoberfest() {
   return (
     <>
       <HeaderSite />
-      <div className="container mx-auto p-4 flex flex-col">
-        <div className="py-16 items-center justify-center flex flex-col gap-4">
+      <div className="container p-4 flex flex-col">
+        <div className="w-full py-16 items-center justify-center flex flex-col gap-4">
           <div className="flex flex-col items-center justify-center">
             <h2 className="text-xl md:text-3xl text-center font-bold leading-relaxed typewriter">
               Junte-se ao{" "}
@@ -151,7 +134,7 @@ export function Hacktoberfest() {
             projetos incríveis e crescer como desenvolvedor.
           </p>
         </div>
-        <div className="flex flex-col md:flex-row items-center md:items-end p-4 gap-4">
+        <div className="w-full flex flex-col md:flex-row items-center md:items-end p-4 gap-4">
           <div className="flex flex-col items-center md:items-start">
             <p className="text-3xl font-bold">Desafios Hacktoberfest</p>
             <p className="text-sm">{filteredChallenges.length} desafios</p>
@@ -203,7 +186,7 @@ export function Hacktoberfest() {
           </div>
         </div>
         <Separator />
-        <main className="flex gap-4 flex-wrap py-4 justify-center">
+        <main className="w-full flex gap-4 flex-wrap py-4 justify-center">
           {filteredChallenges.length === 0 && challengesList.length > 0 && (
             <div className="flex flex-col gap-4 py-10 items-center">
               <div className="flex gap-2 items-center justify-center bg-yellow-400 w-20 h-20 rounded-sm">
@@ -291,7 +274,7 @@ export function Hacktoberfest() {
 
         <Separator />
 
-        <div className="flex flex-col md:flex-row py-28 items-center justify-center gap-8">
+        <div className="w-full flex flex-col md:flex-row py-28 items-center justify-center gap-8">
           <div className="flex flex-col gap-2 max-w-xs space-y-2">
             <p className="text-4xl text-yellow-400 font-bold">
               O que é o
@@ -350,7 +333,7 @@ export function Hacktoberfest() {
           </a>
         </div>
 
-        <div className="flex py-8 w-full flex-col items-center justify-center gap-2">
+        <div className="w-full flex py-8 flex-col items-center justify-center gap-2">
           <h3 className="text-2xl text-center font-bold text-yellow-400 max-w-3xl">
             🤔 Por que escolher o DevChallenge para o
             <a
@@ -402,7 +385,7 @@ export function Hacktoberfest() {
           </p>
         </div>
 
-        <div className="py-16 w-full items-center justify-center flex">
+        <div className="w-full py-16 items-center justify-center flex">
           <div className="max-w-6xl items-center justify-center grid xs:grid-rows-4 md:grid-cols-4 gap-4">
             <div className="cursor-pointer w-full md:h-[310px] p-4 bg-zinc-900 hover:bg-zinc-700 rounded flex flex-col gap-2 items-center justify-start">
               <SlScreenDesktop className="w-12 h-12 text-yellow-400" />
@@ -458,7 +441,7 @@ export function Hacktoberfest() {
           </div>
         </div>
 
-        <div className="flex flex-row items-center justify-center gap-8">
+        <div className="w-full flex flex-row items-center justify-center gap-8">
           <div className="flex flex-col md:flex-row w-full max-w-4xl md:flex-column gap-4 py-8">
             <div className="flex flex-1 flex-col gap-2">
               <h4 className="text-2xl text-purple-600 font-bold">
@@ -521,7 +504,7 @@ export function Hacktoberfest() {
           </div>
         </div>
 
-        <div className="flex flex-col md:flex-row items-center justify-center gap-8">
+        <div className="w-full flex flex-col md:flex-row items-center justify-center gap-8">
           <div className="flex flex-col gap-2 max-w-xs space-y-2">
             <p className="text-4xl font-bold">Entre agora na comunidade!</p>
             <p className="text-yellow-400">
@@ -546,36 +529,7 @@ export function Hacktoberfest() {
             style={{ height: "300px", width: "300px" }}
           />
         </div>
-        <div className="flex flex-col md:flex-row items-center justify-center gap-8">
-          <Player
-            autoplay={true}
-            controls={false}
-            loop={true}
-            src="https://assets5.lottiefiles.com/private_files/lf30_WdTEui.json"
-            style={{ height: "300px", width: "300px" }}
-          />
-          <div className="flex flex-col gap-2">
-            <p className="text-2xl font-bold">
-              Seja notificado sobre novos desafios!
-            </p>
-            <p className="text-yellow-400">
-              Inscreva-se para ser o primeiro a saber sobre novos desafios 😀
-            </p>
-            <Input
-              value={email}
-              onChange={(event) => setEmail(event.target.value)}
-              type="email"
-              placeholder="Digite seu melhor email..."
-            />
-            <Button
-              onClick={handleSubscribe}
-              type="button"
-              className="bg-purple-800 text-white hover:bg-purple-500 rounded-full"
-            >
-              Inscrever
-            </Button>
-          </div>
-        </div>
+        <NewsLetter />
       </div>
       <FooterSite />
     </>

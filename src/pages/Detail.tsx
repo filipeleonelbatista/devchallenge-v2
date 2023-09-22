@@ -76,9 +76,9 @@ export function Detail() {
   return (
     <>
       <HeaderSite />
-      <div className="container mx-auto p-4 flex flex-col">
-        <div className="flex flex-row md:flex-column gap-4 px-4 py-10">
-          <div className="flex flex-1 flex-col gap-4">
+      <div className="container p-0 md:p-4 flex flex-col items-center">
+        <div className="w-full md:w-4/5 flex flex-col-reverse md:flex-row gap-4 items-center md:items-start md:px-4 py-10">
+          <div className="flex w-4/5 md:w-1/2 md:flex-1 flex-col gap-4">
             <h2 className="text-4xl text-yellow-400 font-bold">
               {challenge?.name}
             </h2>
@@ -118,21 +118,17 @@ export function Detail() {
               Começar
             </Button>
           </div>
-          <div className="flex flex-1 flex-col gap-4">
-            <img
-              className="w-full h-full rounded object-cover"
-              src={challenge?.background}
-            />
-          </div>
+          <img className="w-4/5 md:w-1/2 rounded" src={challenge?.background} />
         </div>
-        <div className="flex flex-col gap-4 px-4 py-10">
+
+        <div className="w-full md:w-4/5 flex flex-col gap-4 px-4 py-10">
           <h3 className="text-2xl text-purple-600 font-bold">
             Sobre o desafio
           </h3>
 
           <p className="text-sm text-white">Seu desafio é.</p>
 
-          <div className="flex flex-row md:flex-column gap-4 py-8">
+          <div className="flex flex-col md:flex-row gap-4 py-8">
             <div className="flex flex-1 flex-col gap-2">
               <h4 className="text-2xl text-purple-600 font-bold">
                 O Que está incluso?
