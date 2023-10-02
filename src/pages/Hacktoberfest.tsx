@@ -19,11 +19,10 @@ import { useEffect, useMemo, useState } from "react";
 import { FaDiscord } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
+import AcceptTerms from "@/components/AcceptTerms";
 import NewsLetter from "@/components/NewsLetter";
 import { AiOutlineCode } from "react-icons/ai";
-import { IoShirtOutline } from "react-icons/io5";
 import { SlScreenDesktop } from "react-icons/sl";
-import AcceptTerms from "@/components/AcceptTerms";
 
 export function Hacktoberfest() {
   const navigate = useNavigate();
