@@ -201,8 +201,8 @@ export function Challenges() {
                 </h3>
 
                 <p className="text-sm text-white">
-                  {challenge.description.length > 120
-                    ? challenge.description.substr(0, 120) + "..."
+                  {challenge.description.length > 80
+                    ? challenge.description.substr(0, 80) + "..."
                     : challenge.description}
                 </p>
 

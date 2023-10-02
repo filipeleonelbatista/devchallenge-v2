@@ -38,6 +38,8 @@ export function Hacktoberfest() {
       (item) => item.active && item.isHacktoberfest
     );
 
+    console.log("challengesList", challengesList[0]);
+
     const languageFiltered =
       languageFilter === ""
         ? activeOnly
@@ -233,14 +235,23 @@ export function Hacktoberfest() {
               </div>
 
               <div className="absolute top-4 right-4 flex flex-col gap-1">
-                {challenge.techs.map((item) => (
+                {challenge.techs.slice(0, 2).map((item) => (
                   <div
                     key={`${item}-${challenge.id}`}
-                    className="px-4 py-0.5 text-sm font-bold bg-gray-700 flex items-center justify-center rounded-full"
+                    title={item}
+                    className="px-4 py-0.5 text-sm font-bold bg-gray-700 flex items-center justify-center rounded-full cursor-pointer"
                   >
                     {item}
                   </div>
                 ))}
+                {challenge.techs.length > 2 && (
+                  <div
+                    title={challenge.techs.slice(2).join(", ")}
+                    className="px-4 py-0.5 text-sm font-bold bg-gray-700 flex items-center justify-center rounded-full cursor-pointer"
+                  >
+                    mais {challenge.techs.length - 2}
+                  </div>
+                )}
               </div>
               <img
                 onClick={() => navigate(`/details/${challenge.id}`)}
@@ -249,15 +260,15 @@ export function Hacktoberfest() {
               />
               <div className="h-full flex flex-col gap-4 px-4 pb-4 items-center justify-between">
                 <h3
-                  className="text-2xl text-white cursor-pointer"
+                  className="text-2xl text-white text-center cursor-pointer"
                   onClick={() => navigate(`/details/${challenge.id}`)}
                 >
                   {challenge.name}
                 </h3>
 
                 <p className="text-sm text-white">
-                  {challenge.description.length > 120
-                    ? challenge.description.substr(0, 120) + "..."
+                  {challenge.description.length > 80
+                    ? challenge.description.substr(0, 80) + "..."
                     : challenge.description}
                 </p>
 

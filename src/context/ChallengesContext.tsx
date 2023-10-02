@@ -119,6 +119,7 @@ export function ChallengesContextProvider(
             description: challengeData.description || "",
             createdAt: challengeData.createdAt || 0,
             active: challengeData.active || false,
+            isHacktoberfest: challengeData.isHacktoberfest || false,
           };
           currentChallegeList.push(challenge);
         });
