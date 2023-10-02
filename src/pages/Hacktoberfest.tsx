@@ -395,7 +395,7 @@ export function Hacktoberfest() {
         </div>
 
         <div className="w-full py-16 items-center justify-center flex">
-          <div className="max-w-6xl items-center justify-center grid xs:grid-rows-3 md:grid-cols-3 gap-4">
+          <div className="max-w-2xl items-center justify-center grid xs:grid-rows-3 md:grid-cols-3 gap-4">
             <div className="cursor-pointer w-full md:h-[310px] p-4 bg-zinc-900 hover:bg-zinc-700 rounded flex flex-col gap-2 items-center justify-start">
               <SlScreenDesktop className="w-12 h-12 text-yellow-400" />
               <p className="font-bold text-center">Projetos de Qualidade</p>
