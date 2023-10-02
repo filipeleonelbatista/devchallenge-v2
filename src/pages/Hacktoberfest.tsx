@@ -38,8 +38,6 @@ export function Hacktoberfest() {
       (item) => item.active && item.isHacktoberfest
     );
 
-    console.log("challengesList", challengesList[0]);
-
     const languageFiltered =
       languageFilter === ""
         ? activeOnly
