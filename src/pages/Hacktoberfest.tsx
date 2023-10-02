@@ -421,33 +421,6 @@ export function Hacktoberfest() {
                 para projetos de código aberto.
               </p>
             </div>
-            <div className="cursor-pointer w-full md:h-[310px] p-4 bg-zinc-900 hover:bg-zinc-700 rounded flex flex-col gap-2 items-center justify-start">
-              <IoShirtOutline className="w-12 h-12 text-yellow-400" />
-              <p className="font-bold text-center">Prêmios e Reconhecimento</p>
-              <p className="text-white text-center">
-                Além das recompensas do
-                <a
-                  href="https://hacktoberfest.com/"
-                  target="_blank"
-                  rel="nofollow noreferer noopener"
-                  className="font-bold uppercase hacktoberfont"
-                >
-                  {" "}
-                  Hacktoberfest
-                </a>
-                , o{" "}
-                <a
-                  href="https://discord.gg/yvYXhGj"
-                  target="_blank"
-                  rel="nofollow noreferer noopener"
-                >
-                  <b>
-                    <span className="text-yellow-400">Dev</span>Challenge
-                  </b>
-                </a>{" "}
-                oferece reconhecimento especial para os membros mais ativos.
-              </p>
-            </div>
           </div>
         </div>
 
